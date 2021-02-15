@@ -1,0 +1,17 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: python:3
+  script:
+    # this configures Django application to use attached postgres database that is run on `postgres` host
+    - pip install -r requirements.txt
+    - python manage.py test
+    - coverage run --source='.' --omit="venv/*" manage.py test
+    - coverage xml
+    - coverage report
+  coverage: /^TOTAL.+?(\d+\%)$/
+  artifacts:
+    reports:
+      cobertura: coverage.xml
