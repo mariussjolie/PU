@@ -1,6 +1,6 @@
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/-/commits/master)
 [![coverage report](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/-/commits/master)
-[![pylint](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/badges/pylint.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140/landsby-2/gruppe-22/r-ddi/lint/)
+[![pylint](http://tdt4140.pages.stud.idi.ntnu.no/landsby-2/gruppe-22/r-ddi/badges/pylint.svg)](http://tdt4140.pages.stud.idi.ntnu.no/landsby-2/gruppe-22/r-ddi/lint/)
 
 # Røddi
 
