@@ -1,0 +1,23 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+  Hi {{ user.username }}!<br><br>
+  This is your homepage. Estates you are a part of will show up here.
+
+  {% if user.is_staff %}
+    <a href="{% url 'admin:index' %}">Admin page</a>
+  {% endif %}
+
+{% else %}
+  <p id="home">You are not logged in</p>
+  <br>
+  <br> 
+{% endif %}
+
+{% endblock %}

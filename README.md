@@ -8,6 +8,11 @@ pip install django
 ```
 
 To run the development-server from terminal:
-```
+```shell
 python manage.py runserver
+```
+
+To run tests:
+```shell
+python manage.py test
 ```
