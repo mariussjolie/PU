@@ -12,9 +12,12 @@ test:
     - python manage.py test
     - coverage run --source='.' --omit="venv/*" manage.py test
     - coverage xml
+    - coverage html
     - coverage report
   coverage: /^TOTAL.+?(\d+\%)$/
   artifacts:
+    paths:
+      - htmlcov
     reports:
       cobertura: coverage.xml
 
@@ -45,7 +48,7 @@ pages:
   stage: deploy
   image: alpine:latest
   script:
-    - echo
+    - mv htmlcov/ public/coverage
   artifacts:
     paths:
       - public
