@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  color: red;
+}
+
+</style>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+  <form id="signup" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="knapp1" type="submit">Sign up</button>
+  </form>
+{% endblock %}
