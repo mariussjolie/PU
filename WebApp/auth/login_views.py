@@ -1,9 +1,11 @@
+"""Module containing endpoints for login/signup"""
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from WebApp.auth.user_register_form import UserRegisterForm
 
 
 def signup(request):
+    """Signup endpoint"""
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
