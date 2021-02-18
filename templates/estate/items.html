@@ -1,0 +1,25 @@
+<!-- templates/estate/items.html -->
+{% extends 'base.html' %}
+
+{% block title %}Items in estate{% endblock %}
+
+{% block content %}
+    For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
+    If you want to keep it you have to choose how important the item is to you.<br><br>
+
+    Item one:
+    <h id="house">House</h>
+    <select id="keep" name="keep">
+      <option value="" disabled selected>Keep/donate/throw</option>
+      <option value="important">Keep</option>
+      <option value="little_important">Donate</option>
+      <option value="if_noone">Throw</option>
+    </select>
+
+    <select id="choice" name="importance">
+      <option value="" disabled selected>Importance</option>
+      <option value="one">1</option>
+      <option value="two">2</option>
+      <option value="three">3</option>
+    </select>
+{% endblock %}

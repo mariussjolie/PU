@@ -1,9 +1,10 @@
 body {
     margin: 0;
-    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-family: "Roboto", sans-serif;/*"Niconne";*/
+    font-size: 16px;
 }
 #knapp {
-    background-color: red; /* Green */
+    background-color: Blue; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -16,13 +17,13 @@ body {
 #login {
     outline: 5;
     border-radius: 10px;
-    background: green;
+    background:#87CEFA;
     width: 100%;
     margin-top: 5px;
     border: 0;
     padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
+    color: white;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -33,9 +34,9 @@ body {
     background-image: linear-gradient(yellow, green);
 }
 
-#knapp1 {
+#signup {
     color:white;
-    background-image: linear-gradient(yellow, green);
+    background-image: linear-gradient(RoyalBlue, White);
     font-size: 23px;
 }
 
@@ -46,13 +47,15 @@ body {
 
 #home {
     color:white;
-    background-image: linear-gradient(yellow, green);
+    background-color: Black;
     text-align: center;
     display: block;
     position: relative;
+    top: 30px;
+    left: 0px;
     max-width: 260px;
-    margin: auto;
-    padding: 10px 45px 25px 45px;
+    margin: 10px 10px 10px 10px;
+    padding: 40px 35px 40px 35px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8), 0 5px 5px 0 rgba(0, 0, 0, 0.6);
     border-radius: 10px;
@@ -60,16 +63,16 @@ body {
 }
 
 body {
-    background-image: url("https://cdn-bcigh.nitrocdn.com/txsYnynpGVpvnEqQRzSBMPRpCgNpRcqN/assets/static/optimized/wp-content/uploads/2019/06/259ca8e6924f2c4cbcd2427e792e13d9.d%C3%B8dsboeoslo.jpg");
-    background-repeat: no-repeat;
+    background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("https://w.wallhaven.cc/full/1k/wallhaven-1k8p2v.jpg");
     background-size: 100%;
+    font-size: 16px;
 }
 .navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background-color: beige;
+    background-color: black;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.9), 0 5px 5px 0 rgba(0, 0, 0, 0.5);
     color: black;
 }
@@ -79,12 +82,57 @@ body {
     padding: 0;
 }
 
-#navtitle {
-    font-size: 2rem;
-    font-family: "Niconne";
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items:baseline;
 }
+
+.container p {
+    font-size: 3.3rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    overflow: hidden;
+    padding: 0.5rem;
+    margin-right: 60%;
+
+}
+
+.txt-type {
+    color: #8B0000;
+    font-weight: normal;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color:white;
+    margin-left: 0.1rem;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%  { background-color:white; }
+    49% { background-color:white; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100%  { background-color:white; }
+}
+
+.container p span.cursor.typing {
+    animation: none;
+}
+#navtitle {
+    font-size: 3rem;
+    font-family: "Roboto", sans-serif;/*"Niconne";*/
+    color: #87CEFA;
+}
+
+
 .navigation a {
-    color: inherit;
+    color: white;
     text-decoration: none;
 }
 .navigation h2 {
@@ -99,22 +147,114 @@ body {
 .main {
     padding: 20px;
 }
-.login {
-    width: 300px;
-    color: green;
-    margin:auto;
+
+#login-button {
+    outline: 5;
+    border-radius: 10px;
+    background:#87CEFA;
+    width: 65%;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 2px 5px 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#signup-form label[for = "id_username"] {
+    color: #87CEFA;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_password1"] {
+    color: #87CEFA;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_email"] {
+    color: #87CEFA;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_password2"] {
+    color: #87CEFA;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
 }
 
 #signup {
+    outline: 5;
+    border-radius: 10px;
+    background:#87CEFA;
+    width: 65%;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 2px 5px 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+.login {
     font-family: "Roboto", sans-serif;
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
+    background: black;
+    color: #87CEFA;
     opacity: 99%;
     max-width: 260px;
-    margin: 200px auto 100px;
-    padding: 10px 45px 30px 45px;
+    margin: 10px auto 100px;
+    padding: 10px 30px 10px 30px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
+#signup-form {
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    z-index: 1;
+    background: black;
+    color: #87CEFA;
+    opacity: 99%;
+    max-width: 260px;
+    margin: 10px auto 100px;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+
+/*Homepage*/
+#welcome {
+    font-size: large;
+    font-weight: bold;
+}
+
+#to_estates {
+    background: black;
+    color: white;
+    margin: 10px auto 100px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 10px;
+    opacity: 99%;
+    z-index: 1;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+}
+
+/*Items*/
+#house {
+    background: #AAAAAA;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
