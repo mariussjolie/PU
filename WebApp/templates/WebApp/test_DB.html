@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h>Disse dødsboene er lagret i DB</h>
+{% for estate in estates %}
+    <li>
+        {{ estate.title }} {{ estate.address }}
+    </li>
+{% endfor %}
+</body>
+</html>
