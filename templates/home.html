@@ -7,15 +7,19 @@
 
 {% if user.is_authenticated %}
 
-  Hi {{ user.username }}!<br><br>
-  This is your homepage. Estates you are a part of will show up here.
+  <p id="welcome">Hi {{ user.username }}!</p>
+  Welcome to your homepage.<br><br>
+  <a href="estates/"> <button id="to_estates">Your estates</button></a>
+
 
   {% if user.is_staff %}
     <a href="{% url 'admin:index' %}">Admin page</a>
   {% endif %}
 
 {% else %}
-  <p id="home">You are not logged in</p>
+<div class="container">
+  <p>Welcome to <span class="txt-type" data-wait="800" data-words='["efficiency", "safety", "Røddi"]'></span><span class="cursor">&nbsp;</span>
+</div>
   <br>
   <br> 
 {% endif %}

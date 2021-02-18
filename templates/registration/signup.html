@@ -3,7 +3,7 @@
 <head>
 <style>
 body {
-  color: red;
+  color: Black;
 }
 
 </style>
@@ -12,9 +12,12 @@ body {
 {% extends 'base.html' %}
 
 {% block content %}
-  <form id="signup" method="post">
+  <form id="signup-form" method="post">
     {% csrf_token %}
+    <br>
     {{ form.as_p }}
-    <button id="knapp1" type="submit">Sign up</button>
+    <br>
+
+    <button id="signup" type="submit">Sign up</button>
   </form>
 {% endblock %}
