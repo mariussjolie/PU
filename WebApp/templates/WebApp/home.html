@@ -17,14 +17,14 @@
 
       {% for estate in estates %}
           <a href="{% url 'estate' estate.id %}">
-              <button id="to_items">{{ estate.title }}</button>
+              <button id="login-button">{{ estate.title }}</button>
           </a>
       {% endfor %}
 
 
   {% if user.is_staff %}
     <br>
-    <a href="{% url 'admin:index' %}">Admin page</a>
+    <a href="{% url 'admin:index' %}"><button id="login-button">Admin page</button></a>
   {% endif %}
   </div>
 
