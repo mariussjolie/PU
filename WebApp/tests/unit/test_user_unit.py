@@ -5,10 +5,11 @@ from django.test import TestCase
 
 class UserUnitTest(TestCase):
     """Unit test for User class"""
+
     def setUp(self):
         """Set up objects for testing"""
         self.user: get_user_model
-        self.user = get_user_model().objects\
+        self.user = get_user_model().objects \
             .create_user("username123", "email@email.com", "password123")
 
     def test_username(self):

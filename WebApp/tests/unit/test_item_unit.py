@@ -1,17 +1,14 @@
-"""Module containing Estate unit test"""
+"""Module containing Item Unit test"""
 import datetime
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from WebApp.models import Estate
+from WebApp.models import Estate, Item
 
 
-# Create your tests here.
-
-
-class EstateUnitTest(TestCase):
-    """Unit test for Estate"""
+class ItemUnitTest(TestCase):
+    """Unit test for Item"""
 
     def setUp(self):
         """Set up test objects"""
@@ -24,14 +21,10 @@ class EstateUnitTest(TestCase):
         self.test_estate.save()
         self.test_estate.users.add(self.user)
 
-    def test_address(self):
-        """Test adress"""
-        self.assertEqual("Trondheim", self.test_estate.address)
+        self.test_item = Item.objects.create(
+            id=1, estate=self.test_estate, description="Stol med brukket ben")
+        self.test_item.save()
 
-    def test_title(self):
-        """Test title"""
-        self.assertEqual("Solfrid 90", self.test_estate.title)
-
-    def test_user(self):
-        """Test user"""
-        self.assertEqual(self.user, self.test_estate.users.get())
+    def test_description(self):
+        """Test Item description"""
+        self.assertEqual("Stol med brukket ben", self.test_item.description)
