@@ -1,3 +1,4 @@
+"""Module containing Integration test for estate"""
 import datetime
 
 from django.contrib.auth import get_user_model
@@ -10,8 +11,10 @@ from WebApp.models import Estate
 
 
 class EstateIntegrationTest(TestCase):
+    """Estate Integration Test"""
 
     def setUp(self):
+        """Set up test objects"""
         self.user: get_user_model
         self.user = get_user_model().objects.create_user(
             "username123", "email@email.com", "password123")
@@ -22,11 +25,13 @@ class EstateIntegrationTest(TestCase):
         self.test_estate.users.add(self.user)
 
     def test_endpoint(self):
-        c = Client()
-        response = c.get("/DB/")
+        """Test endpoint"""
+        client = Client()
+        response = client.get("/DB/")
         self.assertEqual(200, response.status_code)
 
     def test_show_estate(self):
-        c = Client()
-        response = c.get("/DB/")
+        """Test show estate"""
+        client = Client()
+        response = client.get("/DB/")
         self.assertContains(response, "Solfrid 90")

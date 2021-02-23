@@ -5,9 +5,10 @@ from django.test import Client, TestCase
 
 class UserIntegrationTest(TestCase):
     """User integration test"""
+
     def setUp(self):
         """Set up object for testing"""
-        self.user = get_user_model().objects\
+        self.user = get_user_model().objects \
             .create_user("testuser", "test@test.com", "testpassword")
 
     def test_endpoints(self):

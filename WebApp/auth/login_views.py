@@ -1,6 +1,7 @@
 """Module containing endpoints for login/signup"""
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+
 from WebApp.auth.user_register_form import UserRegisterForm
 
 

@@ -1,0 +1,25 @@
+<!-- templates/estate/estates.html -->
+{% extends 'base.html' %}
+
+{% block title %}Your estates{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1 id="title_estates">Hi {{ user.username }}! You are a part of these estates:</h1>
+
+        This is your homepage. Estates you are a part of will show up here.<br><br>
+
+        {% for estate in estates %}
+            <a href="{% url 'estate' estate.id %}">
+                <button id="to_items">{{ estate.title }}</button>
+            </a>
+        {% endfor %}
+
+    {% else %}
+        <p id="not_loggedin">You are not logged in</p>
+
+    {% endif %}
+
+
+
+{% endblock %}
