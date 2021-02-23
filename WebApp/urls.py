@@ -1,3 +1,4 @@
+# pylint: skip-file
 """Røddi URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
-
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     path('DB/', views.test_db, name='DB'),
     path('estates/', views.estate_overview, name='Estates'),
     path('estates/<int:estate_id>/', views.view_estate, name='estate'),
+    path('estates/<int:estate_id>/end_estate/', TemplateView.as_view(template_name='estate/end_estate.html'), name='end_estate'),
     path('image_upload', views.item_image, name='image_upload'),
     path('success', views.success, name='success'),
 ]

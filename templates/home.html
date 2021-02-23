@@ -7,14 +7,23 @@
 
 {% if user.is_authenticated %}
 
-  <p id="welcome">Hi {{ user.username }}!</p>
-  Welcome to your homepage.<br><br>
-  <a href="estates/"> <button id="to_estates">Your estates</button></a>
+
+
+  <form id="home_box" action='items' method="get">
+    <h1 id="title_estates">Hi {{ user.username }}! <br> You are a part of these estates:</h1>
+
+
+        This is your homepage. Estates you are a part of will show up here.<br><br>
+
+
+        <button id="gudrunn">Gudrunn's estate</button>
 
 
   {% if user.is_staff %}
+    <br>
     <a href="{% url 'admin:index' %}">Admin page</a>
   {% endif %}
+  </form>
 
 {% else %}
 <div class="container">

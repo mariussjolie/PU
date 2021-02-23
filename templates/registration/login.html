@@ -3,6 +3,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="login">
+<!--<p id="login_title">LOG IN</p>-->
   <form id="login-form" method="post">
     {% csrf_token %}
     {{ form.as_p }}

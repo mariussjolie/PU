@@ -1,8 +1,10 @@
 body {
     margin: 0;
-    font-family: "Roboto", sans-serif;/*"Niconne";*/
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
 }
+
+
 #knapp {
     background-color: Blue; /* Green */
     border: none;
@@ -15,9 +17,9 @@ body {
 }
 
 #login {
-    outline: 5;
+    outline: 6;
     border-radius: 10px;
-    background:#87CEFA;
+    background:#003366;
     width: 100%;
     margin-top: 5px;
     border: 0;
@@ -63,7 +65,7 @@ body {
 }
 
 body {
-    background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("https://w.wallhaven.cc/full/1k/wallhaven-1k8p2v.jpg");
+    background:linear-gradient(rgba(96, 96, 96,0.4), rgba(96, 96, 96,0.4)), url("https://w.wallhaven.cc/full/1k/wallhaven-1k8p2v.jpg");
     background-size: 100%;
     font-size: 16px;
 }
@@ -96,7 +98,7 @@ body {
     text-align: center;
     overflow: hidden;
     padding: 0.5rem;
-    margin-right: 60%;
+    /*margin-right: 60%;*/
 
 }
 
@@ -123,11 +125,22 @@ body {
 
 .container p span.cursor.typing {
     animation: none;
+
+
+/*NAVIGATION*/
 }
 #navtitle {
     font-size: 3rem;
-    font-family: "Roboto", sans-serif;/*"Niconne";*/
-    color: #87CEFA;
+    font-family: "Roboto", sans-serif;
+    color: #FFFFFF;
+}
+
+#fff {
+
+    font-family: "Roboto", sans-serif;
+    color: #8B0000;/*#6699CC;*/
+    margin: 0px auto 1px;
+
 }
 
 
@@ -138,6 +151,7 @@ body {
 .navigation h2 {
     margin: 0;
     padding: 0;
+
 }
 
 #logo {
@@ -148,10 +162,26 @@ body {
     padding: 20px;
 }
 
+/*LOG IN PAGE*/
+
+#login-form label[for = "id_username"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#login-form label[for = "id_password"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
 #login-button {
     outline: 5;
     border-radius: 10px;
-    background:#87CEFA;
+    background:#003366;
     width: 65%;
     margin-top: 5px;
     border: 0;
@@ -161,52 +191,11 @@ body {
     cursor: pointer;
 }
 
-#signup-form label[for = "id_username"] {
-    color: #87CEFA;
-    width: 100%;
-    display: block;
-    padding-bottom: 10px;
-}
-
-#signup-form label[for = "id_password1"] {
-    color: #87CEFA;
-    width: 100%;
-    display: block;
-    padding-bottom: 10px;
-}
-
-#signup-form label[for = "id_email"] {
-    color: #87CEFA;
-    width: 100%;
-    display: block;
-    padding-bottom: 10px;
-}
-
-#signup-form label[for = "id_password2"] {
-    color: #87CEFA;
-    width: 100%;
-    display: block;
-    padding-bottom: 10px;
-}
-
-#signup {
-    outline: 5;
-    border-radius: 10px;
-    background:#87CEFA;
-    width: 65%;
-    margin-top: 5px;
-    border: 0;
-    padding: 5px 2px 5px 5px;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-}
 .login {
     font-family: "Roboto", sans-serif;
     position: relative;
     z-index: 1;
     background: black;
-    color: #87CEFA;
     opacity: 99%;
     max-width: 260px;
     margin: 10px auto 100px;
@@ -215,6 +204,50 @@ body {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
+
+
+/*SIGN UP PAGE*/
+#signup-form label[for = "id_username"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_password1"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_email"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup-form label[for = "id_password2"] {
+    color: #FFFFFF;
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#signup {
+    outline: 5;
+    border-radius: 10px;
+    background:#003366;
+    width: 65%;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 2px 5px 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
 #signup-form {
     font-family: "Roboto", sans-serif;
     position: relative;
@@ -231,30 +264,95 @@ body {
 }
 
 
+
 /*Homepage*/
 #welcome {
     font-size: large;
     font-weight: bold;
 }
 
-#to_estates {
-    background: black;
-    color: white;
-    margin: 10px auto 100px;
-    padding: 10px 30px 10px 30px;
-    border-radius: 10px;
-    opacity: 99%;
-    z-index: 1;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-
-}
 
 /*Items*/
 #house {
-    background: #AAAAAA;
+    color: white;
+    background: #003366;
     padding: 5px;
-    border-radius: 5px;
     font-weight: bold;
+}
+
+#text_items{
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    z-index: 1;
+    background: black;
+    color: white;
+    opacity: 99%;
+    max-width: 360px;
+    margin: 10px auto 20px;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+#box_items{
+    font-family: "Roboto", sans-serif;
+    /*position: relative;*/
+    z-index: 1;
+    background: black;
+    color: #FFFFFF;
+    opacity: 99%;
+    max-width: 360px;
+    margin: 10px auto 10px;
+    padding: 10px 30px 20px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+
+
+
+#home_box {
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    z-index: 1;
+    background: black;
+    color: #FFFFFF;
+    opacity: 99%;
+    max-width: 260px;
+    margin: 10px auto 100px;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+#to_estates {
+    outline: 5;
+    border-radius: 10px;
+    background:#003366;
+    width: 65%;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 2px 5px 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+
+#gudrunn {
+    outline: 5;
+    border-radius: 10px;
+    background:#003366;
+    width: 65%;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 2px 5px 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 

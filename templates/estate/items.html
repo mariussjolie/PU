@@ -4,22 +4,76 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-    For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
-    If you want to keep it you have to choose how important the item is to you.<br><br>
 
-    Item one:
+    <form id="text_items">
+    <h1 id="title_items">Distribute assets</h1>
+    <p id="items_t">For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
+        If you want to keep it you have to choose how important the item is to you.</p>
+    </form>
+
+    <form id="box_items" action="end_estate" method="get">
+
+        Item one:<br>
     <h id="house">House</h>
-    <select id="keep" name="keep">
+    <select id="rull" name="keep">
       <option value="" disabled selected>Keep/donate/throw</option>
       <option value="important">Keep</option>
       <option value="little_important">Donate</option>
       <option value="if_noone">Throw</option>
     </select>
 
-    <select id="choice" name="importance">
+    <select id="rull" name="importance">
       <option value="" disabled selected>Importance</option>
       <option value="one">1</option>
       <option value="two">2</option>
       <option value="three">3</option>
     </select>
+        <label for="comment">Comment:</label>
+        <input style="width: 323px;" type="text" id="comment"><br>
+
+           <br>Item two:<br>
+    <h id="house">Car</h>
+    <select id="rull" name="keep">
+      <option value="" disabled selected>Keep/donate/throw</option>
+      <option value="important">Keep</option>
+      <option value="little_important">Donate</option>
+      <option value="if_noone">Throw</option>
+    </select>
+
+    <select id="rull" name="importance">
+      <option value="" disabled selected>Importance</option>
+      <option value="one">1</option>
+      <option value="two">2</option>
+      <option value="three">3</option>
+    </select>
+        <br><label for="comment">Comment:</label>
+        <input style="width: 323px;" type="text" id="comment"><br>
+
+        <br>Item tree:<br>
+    <h id="house">Toothbrush</h>
+    <select id="rull" name="keep">
+      <option value="" disabled selected>Keep/donate/throw</option>
+      <option value="important">Keep</option>
+      <option value="little_important">Donate</option>
+      <option value="if_noone">Throw</option>
+    </select>
+
+    <select id="rull" name="importance">
+      <option value="" disabled selected>Importance</option>
+      <option value="one">1</option>
+      <option value="two">2</option>
+      <option value="three">3</option>
+    </select>
+        <br><label for="comment">Comment:</label>
+        <input style="width: 323px;" type="text" id="comment"><br>
+
+    <br>
+        <button id="login-button">Finish estate</button>
+
+    </form>
+
+
+
+
+
 {% endblock %}
