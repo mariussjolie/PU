@@ -6,6 +6,11 @@ from django.core.exceptions import PermissionDenied
 from .forms import ItemForm
 from .models import Estate, Item
 
+def home(request):
+    """Home View"""
+    estates = Estate.objects.filter(users__id=request.user.id)
+    return render(request, 'WebApp/home.html', {'estates': estates})
+
 
 def test_db(request):
     """TestDB view"""
