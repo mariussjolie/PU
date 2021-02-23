@@ -1,0 +1,39 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+
+  <div id="home_box">
+    <h1 id="title_estates">Hi {{ user.username }}! <br> You are a part of these estates:</h1>
+
+
+        This is your homepage. Estates you are a part of will show up here.<br><br>
+
+      {% for estate in estates %}
+          <a href="{% url 'estate' estate.id %}">
+              <button id="to_items">{{ estate.title }}</button>
+          </a>
+      {% endfor %}
+
+
+  {% if user.is_staff %}
+    <br>
+    <a href="{% url 'admin:index' %}">Admin page</a>
+  {% endif %}
+  </div>
+
+{% else %}
+<div class="container">
+  <p>Welcome to <span class="txt-type" data-wait="800" data-words='["efficiency", "safety", "Røddi"]'></span><span class="cursor">&nbsp;</span>
+</div>
+  <br>
+  <br> 
+{% endif %}
+
+{% endblock %}

@@ -5,28 +5,47 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-    For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
-    If you want to keep it you have to choose how important the item is to you.<br><br>
 
-    {% for item in items %}
-        <div>
-            <img width=100 src="{% static  item.picture.url %}">
+    <div id="text_items">
+        <h1 id="title_items">Distribute assets</h1>
+        <p id="items_t">For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
+            If you want to keep it you have to choose how important the item is to you.</p>
+    </div >
 
-            <h id="house">{{ item.description }}</h>
-            <select id="keep" name="keep">
-                <option value="" disabled selected>Keep/donate/throw</option>
-                <option value="important">Keep</option>
-                <option value="little_important">Donate</option>
-                <option value="if_noone">Throw</option>
-            </select>
+    <form id="box_items" action="end_estate" method="get">
 
-            <select id="choice" name="importance">
-                <option value="" disabled selected>Importance</option>
-                <option value="one">1</option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-            </select>
-        </div>
+        {% for item in items %}
+            <div>
 
-    {% endfor %}
+                <h3 id="house">{{ item.description }}</h3>
+                <img width=100 src="{% static  item.picture.url %}">
+                <br>
+                <select id="rull" name="keep">
+                    <option value="" disabled selected>Keep/donate/throw</option>
+                    <option value="important">Keep</option>
+                    <option value="little_important">Donate</option>
+                    <option value="if_noone">Throw</option>
+                </select>
+
+                <select id="rull" name="importance">
+                    <option value="" disabled selected>Importance</option>
+                    <option value="one">1</option>
+                    <option value="two">2</option>
+                    <option value="three">3</option>
+                </select>
+                <br>
+                <label for="comment">Comment:</label>
+                <input style="width: 323px;" type="text" id="comment"><br>
+            </div>
+        {% endfor %}
+
+        <br>
+        <button id="login-button">Finish estate</button>
+
+    </form>
+
+
+
+
+
 {% endblock %}

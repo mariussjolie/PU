@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
+    path('', views.home , name='home'),
     path('auth/', include('WebApp.auth.urls')),
     path('DB/', views.test_db, name='DB'),
     path('estates/', views.estate_overview, name='Estates'),
