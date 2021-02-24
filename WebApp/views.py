@@ -2,9 +2,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
+from django.forms import modelformset_factory
+from django.db import IntegrityError
 
-from .forms import ItemForm
-from .models import Estate, Item
+
+from .forms import ItemForm, VoteForm
+from .models import Estate, Item, Vote
+
 
 def home(request):
     """Home View"""
@@ -30,9 +34,33 @@ def view_estate(request, estate_id):
     users = estate.users.all()
     if not request.user in users:
         raise PermissionDenied
+
     Item.objects.filter(estate__id= estate_id)
     items = estate.item_set.all()
-    return render(request, 'WebApp/estate/items.html', {'estate': estate, 'items': items})
+    votes = Vote.objects.filter(item__in=items)
+
+
+    if not len(votes) == len(items):
+        #Initiate votes for form
+        for item in items:
+            vote = Vote(user=request.user, item=item)
+            try:
+                vote.save()
+            except IntegrityError: #Skip if already in DB
+                pass
+        votes = Vote.objects.filter(item__in=items)
+
+
+    VoteFormSet = modelformset_factory(Vote, form=VoteForm, extra=0)
+
+    if request.method == 'POST':
+        formset = VoteFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = VoteFormSet(queryset=votes)
+
+    return render(request, 'WebApp/estate/items.html', {'estate': estate, 'items': items, 'formset': formset})
 
 
 def item_image(request):

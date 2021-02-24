@@ -12,32 +12,18 @@
             If you want to keep it you have to choose how important the item is to you.</p>
     </div >
 
-    <form id="box_items" action="end_estate" method="get">
+    <form id="box_items" method="post">
+        {{ formset.management_form }}
 
-
-        {% for item in items %}
+        {% for form in formset %}
+            {% csrf_token %}
             <div>
-
-
-                <h3 id="house">{{ item.description }}</h3>
-                <img width=100 src="{% static  item.picture.url %}">
+                <h3 id="house">{{ form.instance.item.description }}</h3>
+                <img width=100 src="{% static  form.instance.item.picture.url %}">
                 <br>
-                <select id="rull" name="keep">
-                    <option value="" disabled selected>Keep/donate/throw</option>
-                    <option value="important">Keep</option>
-                    <option value="little_important">Donate</option>
-                    <option value="if_noone">Throw</option>
-                </select>
-
-                <select id="rull" name="importance">
-                    <option value="" disabled selected>Importance</option>
-                    <option value="one">1</option>
-                    <option value="two">2</option>
-                    <option value="three">3</option>
-                </select>
-                <br>
-                <br>
-                <!--<label for="comment">Comment:</label>
+                {{ form.as_p }}
+                <!--<br>
+                <label for="comment">Comment:</label>
                 <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
         {% endfor %}

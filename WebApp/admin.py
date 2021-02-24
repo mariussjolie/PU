@@ -11,6 +11,7 @@ class ItemInline(admin.TabularInline):
 
 class EstateAdmin(admin.ModelAdmin):
     """Form for adding estate"""
+    list_display = ('title', 'address')
     inlines = [
         ItemInline,
     ]
@@ -24,11 +25,14 @@ class VoteInline(admin.TabularInline):
 
 class ItemAdmin(admin.ModelAdmin):
     """Form for adding Item"""
+    list_display = ('description', 'estate')
     inlines = [
         VoteInline,
     ]
 
+class VoteAdmin(admin.ModelAdmin):
+    list_display = ('item', 'user', 'choice', 'importance')
 
 admin.site.register(Estate, EstateAdmin)
-admin.site.register(Vote)
 admin.site.register(Item, ItemAdmin)
+admin.site.register(Vote, VoteAdmin)
