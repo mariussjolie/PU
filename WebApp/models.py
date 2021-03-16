@@ -21,6 +21,7 @@ class Item(models.Model):
     description = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='uploads/images/', default='uploads/images/default_image.png')
 
+
     def __str__(self):
         return self.description
 

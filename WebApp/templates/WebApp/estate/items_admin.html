@@ -1,0 +1,63 @@
+<!-- templates/estate/items.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load vote_tags %}
+
+{% block title %}Items in estate{% endblock %}
+
+{% block content %}
+
+    <div id="text_items">
+        <h1 id="title_items">{{ estate.title }}'s estate</h1>
+
+        {% for item in items %} <br>
+            <p id="admin_item">{{ item.description }}</p>
+            <img width=120 src="{% static  item.picture.url %}">
+
+            <table id="status_admin">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Choice</th>
+                    <th>Importance</th>
+                    <th>Status</th>
+                    <th>Notify</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% with votes|by_user:user as votes_by_user %}
+                        {% for vote in votes_by_user|on_item:item %}
+                            <tr>
+                                <td id="user">{{ vote.user }}</td>
+                                <td>{{ vote.choice }}</td>
+                                <td>{{ vote.importance }}</td>
+                                <td>Finished</td>
+                                <td></td>
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+                                <td id="user">{{ user }}</td>
+                                <td></td>
+                                <td></td>
+                                <td>Unfinished</td>
+                                <td>
+                                    <button id="notify">Notify</button>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    {% endwith %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+

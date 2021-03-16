@@ -360,3 +360,51 @@ body {
 }
 
 
+/* Status overview for admin*/
+
+#notify {
+    outline: 6;
+    border-radius: 10px;
+    background:#003366;
+    width: 100%;
+    margin-top: 5px;
+    border: 0;
+    padding: 3px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#status_admin, td, th {
+  width: 100%;
+  border: 1.5px solid white;
+  border-collapse: collapse;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+
+
+}
+
+th {
+  background: #585858;
+  border-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+#admin_item {
+    width: 100%;
+    color: white;
+    background: #003366;
+    padding: 5px;
+    font-weight: bold;
+}
+
+#user {
+    font-weight: bold;
+    background: #A0A0A0;
+    color: black;
+}
+
+

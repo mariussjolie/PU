@@ -16,9 +16,18 @@
         This is your homepage. Estates you are a part of will show up here.<br><br>
 
       {% for estate in estates %}
-          <a href="{% url 'estate' estate.id %}">
-              <button id="login-button">{{ estate.title }}</button>
-          </a>
+
+        {% if user.is_superuser %}
+            <a href="{% url 'estate.adminoverview' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+        {% else %}
+
+              <a href="{% url 'estate' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+
+        {% endif %}
       {% endfor %}
 
 
