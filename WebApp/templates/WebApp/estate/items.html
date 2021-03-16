@@ -19,7 +19,7 @@
             {% csrf_token %}
             <div>
                 <h3 id="house">{{ form.instance.item.description }}</h3>
-                <img width=100 src="{% static  form.instance.item.picture.url %}">
+                <img width=120 src="{% static  form.instance.item.picture.url %}">
                 <br>
                 {{ form.as_p }}
                 <!--<br>

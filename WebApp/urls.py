@@ -26,6 +26,7 @@ urlpatterns = [
     path('DB/', views.test_db, name='DB'),
     path('estates/', views.estate_overview, name='Estates'),
     path('estates/<int:estate_id>/', views.view_estate, name='estate'),
+    path('estates/<int:estate_id>/adminoverview/', views.admin_view_estate, name='estate.adminoverview'),
     path('estates/<int:estate_id>/end_estate/', TemplateView.as_view(template_name='estate/end_estate.html'), name='end_estate'),
     path('image_upload', views.item_image, name='image_upload'),
     path('success', views.success, name='success'),
