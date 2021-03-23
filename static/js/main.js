@@ -49,3 +49,12 @@ class TypeWriter {
     const wait = txtElement.getAttribute('data-wait');
     new TypeWriter(txtElement, words, wait);
   }
+
+  function addComment() {
+    var x = document.createElement("P")
+    var y = document.getElementById("commentarea")
+    var i = y.value
+    x.style.cssText ="position: float; display: block; text-content: center; border: 5px solid white; padding: 30px"
+    x.append(i)
+    document.getElementById("commentsection").append(x)
+  }
