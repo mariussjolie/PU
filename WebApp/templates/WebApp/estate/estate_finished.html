@@ -1,0 +1,23 @@
+<!-- templates/estate/estate_finished.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Your estates{% endblock %}
+
+{% block content %}
+<body class="centrify">
+    <div id="text_items">
+        <h1 id="title_items">{{estate.title}}ESTATE NAME</h1>
+        <p id="items_t">Here is an overview of the assigned user for each item.</p>
+    </div >
+        <form id="box_items" method="post">
+            <div>
+                <h2>Item</h2>
+                <img src="https://timesofindia.indiatimes.com/photo/67586673.cms" width="50%" alt="">
+                <p class="owner">Owner: USERNAME</p>
+                <br>
+            </div>
+        </form>
+
+</body>
+{% endblock %}
