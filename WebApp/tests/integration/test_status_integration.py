@@ -66,9 +66,4 @@ class StatusIntegrationTest(TestCase):
         self.assertContains(response, self.vote_user2.importance, count=1)
         self.assertContains(response, self.vote_user2.choice, count=1)
         self.assertContains(response, self.vote_user1.importance, count=1)
-        self.assertContains(response, "Notify</button>", count=2)
-
-
-
-
-
+        self.assertContains(response, "Notify</a>", count=2)

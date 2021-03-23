@@ -21,7 +21,6 @@ class Item(models.Model):
     description = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='uploads/images/', default='uploads/images/default_image.png')
 
-
     def __str__(self):
         return self.description
 
@@ -32,8 +31,19 @@ class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.CharField(max_length=99)
     importance = models.IntegerField(default=0)
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['user', 'item'], name="unique_useritem")
         ]
 
+
+class Notify(models.Model):
+    """Class for notifying user to finish estate"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'estate'], name="unique_notification")
+        ]
