@@ -5,6 +5,13 @@ body {
 }
 
 
+# notify_message {
+    color: white;
+    background: red;
+    padding: 5px;
+    font-weight: bold;
+}
+
 #knapp {
     background-color: Blue; /* Green */
     border: none;
@@ -406,5 +413,8 @@ th {
     background: #A0A0A0;
     color: black;
 }
+
+
+
 
 

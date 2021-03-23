@@ -6,13 +6,15 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .forms import ItemForm, VoteForm
-from .models import Estate, Item, Vote
+from .models import Estate, Item, Vote, Notify
 
 
 def home(request):
     """Home View"""
     estates = Estate.objects.filter(users__id=request.user.id)
-    return render(request, 'WebApp/home.html', {'estates': estates})
+    notifications = Notify.objects.filter(user_id=request.user.id)
+
+    return render(request, 'WebApp/home.html', {'estates': estates, 'notifications': notifications})
 
 
 def test_db(request):
@@ -31,6 +33,7 @@ def view_estate(request, estate_id):
     """Estate view"""
     estate = Estate.objects.get(pk=estate_id)
     users = estate.users.all()
+
     if not request.user in users:
         raise PermissionDenied
 
@@ -54,6 +57,11 @@ def view_estate(request, estate_id):
         formset = VoteFormSet(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
+            try:
+                notification = Notify.objects.get(estate__id=estate_id, user__id=request.user.id)
+                notification.delete()
+            except Notify.DoesNotExist:
+                pass
     else:
         formset = VoteFormSet(queryset=votes)
 
@@ -67,6 +75,8 @@ def admin_view_estate(request, estate_id):
     estate = Estate.objects.get(pk=estate_id)
     users = estate.users.all()
 
+    notifications = Notify.objects.filter(estate__id=estate_id)
+
     Item.objects.filter(estate__id=estate_id)
     items = estate.item_set.all()
     votes = {}
@@ -75,7 +85,7 @@ def admin_view_estate(request, estate_id):
     votes = Vote.objects.filter(item__in=items)
 
     return render(request, 'WebApp/estate/items_admin.html',
-                  {'estate': estate, 'items': items, 'votes': votes, 'users': users})
+                  {'estate': estate, 'items': items, 'votes': votes, 'users': users, 'notifications': notifications})
 
 
 def item_image(request):
@@ -94,3 +104,15 @@ def item_image(request):
 def success(request):
     """Success View"""
     return HttpResponse('successfully uploaded')
+
+
+def notify(request, estate_id, user_id):
+    if not request.user.is_staff:
+        raise PermissionDenied
+    try:
+        notifcation = Notify.objects.create(user_id=user_id, estate_id=estate_id)
+        notifcation.save()
+    except IntegrityError:
+        pass
+
+    return redirect("estate.adminoverview", estate_id=estate_id)

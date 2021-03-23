@@ -1,7 +1,7 @@
 """WebApp Admin Forms"""
 from django.contrib import admin
 
-from .models import Estate, Item, Vote
+from .models import Estate, Item, Vote, Notify
 
 
 class ItemInline(admin.TabularInline):

@@ -1,5 +1,7 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}Home{% endblock %}
 
@@ -10,6 +12,15 @@
 
 
   <div id="home_box">
+      {% if not user.is_superuser%}
+      {% for notification in notifications %}
+            <div id="notify_message">
+            <p id="message">NEW MESSAGE FROM OWNER: </p>
+            <p >You need to finish {{ notification.estate.title }}'s estate</p>
+            </div>
+      {% endfor %}
+      {% endif %}
+
     <h1 id="title_estates">Hi {{ user.username }}! <br> You are a part of these estates:</h1>
 
 

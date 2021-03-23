@@ -44,7 +44,11 @@
                                 <td></td>
                                 <td>Unfinished</td>
                                 <td>
-                                    <button id="notify">Notify</button>
+                                    {% for notification in notifications|by_user:user %}
+                                        Notified
+                                    {% empty %}
+                                        <a id="notify" href="./notify/{{user.id}}/">Notify</a>
+                                    {% endfor %}
                                 </td>
                             </tr>
 
