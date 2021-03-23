@@ -5,62 +5,40 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-<body>
     <div class="split left">
         <div class="centered">
-            <h1>Christina</h1>
-            <img src="https://c.files.bbci.co.uk/12A9B/production/_111434467_gettyimages-1143489763.jpg" alt="">
-            <br>
-            <form action="/action_page.php">
-              <label for="Owner">Owner:</label>
-              <select name="cars" id="cars">
-                <option value="Owner">Kim</option>
-                <option value="Owner">Erik</option>
-                <option value="Owner">Bent</option>
-              </select>
+            <form id="box_items" method="post">
+                <h1>Christina</h1>
+                <img src="https://c.files.bbci.co.uk/12A9B/production/_111434467_gettyimages-1143489763.jpg" alt="">
+                <br>
+                <form action="/action_page.php">
+                    <label for="Owner">Owner:</label>
+                    <select name="cars" id="cars">
+                        <option value="Owner">Kim</option>
+                    </select>
+                    <table style="width:100%">
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Importance</th>
+                        </tr>
+                        <tr>
+                            <td>Kim</td>
+                            <td>Keep</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
             </form>
-          </form>
-          <br>
-          <br>
-          <table style="width:100%">
-            <tr>
-              <th>User</th>
-              <th>Action</th>
-              <th>Importance</th>
-            </tr>
-            <tr>
-              <td>Kim</td>
-              <td>Keep</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Bent</td>
-              <td>Donate</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Erik</td>
-              <td>Throw</td>
-              <td>10</td>
-            </tr>
-          </table>
-          <br>
-          <input type="submit" value="Submit">
         </div>
-      </div>
-
-      <div class="split right">
-        <div class="centered">
-            <p class="names_admin">Roger - 29.03.18</p>
-            <p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">Denne katten er min!!!
-            <br>
-            <p class="names_admin">Arnold - 03.03.19</p>
-            <p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">Sloss bak Trondheim Torg kl. 16?
-            <br>
-            <p class="names_admin">Johnny Bravo - 12.01.20</p>
-            <p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">Hei! Lever katten fortsatt? Er interessert!
-
+        <div class="split right">
+            <div class="centered">
+                <form id="box_items" method="post">
+                    <p class="names_admin">Roger - 29.03.18</p>
+                    <p class="comment">Denne katten er min!!!</p>
+                </form>
+            </div>
         </div>
-      </div>
-</body>
 {% endblock %}

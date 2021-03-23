@@ -8,7 +8,7 @@ body {
 }
 
 
-# notify_message {
+#notify_message {
     color: white;
     background: red;
     padding: 5px;
@@ -435,8 +435,6 @@ th {
   /* Control the right side */
 .right {
     right: 0;
-    position: relative;
-    top: 0;
 }
   /* If you want the content centered horizontally and vertically */
 .centered {
@@ -452,6 +450,11 @@ th {
     width: 150px;
 }
 
+.comment {
+    display: block;
+    border: 5px solid white;
+    padding: 30px;
+}
 
 
 
