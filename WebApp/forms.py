@@ -1,11 +1,12 @@
 """WebApp Forms"""
 from django import forms
 from django.contrib.auth.models import User
-from .models import Item, Vote
+from .models import Item, Vote, Comment
 
 
 class ItemForm(forms.ModelForm):
     """Form for adding Item"""
+
     class Meta:
         """Meta class under ItemForm"""
         model = Item
@@ -48,3 +49,11 @@ class DistributeItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ['owner']
+
+class CommentForm(forms.ModelForm):
+    """Form for adding comment"""
+    comment = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = Comment
+        fields = ('comment',)
