@@ -14,9 +14,9 @@ body {
 /* Formats color and background of notify-message that appears on site when user is notified */
 #notify_message {
     color: white;
-    background: red;
+    background: #8B0000;
     padding: 5px;
-    font-weight: bold;
+    border-radius: 10px;
 }
 
 /* Login-button for navbar */
