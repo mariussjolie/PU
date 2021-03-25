@@ -456,5 +456,14 @@ th {
     padding: 30px;
 }
 
+.errorlist li {
+    color: white;
+    list-style-type: none;
+    text-align: left;
+    margin-top: 5px;
+    border: 0;
+    padding: 5px 20px 5px 5px;
+
+}
 
 
