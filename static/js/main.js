@@ -50,17 +50,3 @@ class TypeWriter {
     new TypeWriter(txtElement, words, wait);
   }
 
-  function addComment() {
-    var x = document.createElement("P")
-    var y = document.getElementById("commentarea")
-    var name = document.createElement("P")
-    var date = document.createElement("P")
-    var i = y.value
-    x.style.cssText ="position: relative; display: inline-block; text-content: center; border: 5px solid white; padding: 10px 30px 10px 30px; table-layout:fixed; margin: auto; text-align: none"
-    x.append(i)
-    name.append("Thomas")
-    date.append('10/11/1955 10:40:50 AM')
-    date.style.cssText = "color: red;"
-    document.getElementById("box_items1").append(x, name, date)
-  }
-
