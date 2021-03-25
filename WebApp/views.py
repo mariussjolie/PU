@@ -1,11 +1,13 @@
 """WebApp Views"""
-from django.core.exceptions import PermissionDenied
-from django.db import IntegrityError
-from django.forms import modelformset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.core.exceptions import PermissionDenied
+from django.forms import modelformset_factory, modelform_factory
+from django.db import IntegrityError
 
-from .forms import ItemForm, VoteForm
+
+from .forms import ItemForm, VoteForm, DistributeItemForm
 from .models import Estate, Item, Vote, Notify
 
 
@@ -39,7 +41,7 @@ def view_estate(request, estate_id):
 
     Item.objects.filter(estate__id=estate_id)
     items = estate.item_set.all()
-    votes = Vote.objects.filter(item__in=items)
+    votes = Vote.objects.filter(item__in=items, user=request.user)
 
     if not len(votes) == len(items):
         # Initiate votes for form
@@ -49,12 +51,12 @@ def view_estate(request, estate_id):
                 vote.save()
             except IntegrityError:  # Skip if already in DB
                 pass
-        votes = Vote.objects.filter(item__in=items)
+        votes = Vote.objects.filter(item__in=items,user=request.user)
 
     VoteFormSet = modelformset_factory(Vote, form=VoteForm, extra=0)
 
     if request.method == 'POST':
-        formset = VoteFormSet(request.POST, request.FILES)
+        formset = VoteFormSet(request.POST)
         if formset.is_valid():
             formset.save()
             try:
@@ -116,3 +118,62 @@ def notify(request, estate_id, user_id):
         pass
 
     return redirect("estate.adminoverview", estate_id=estate_id)
+
+
+def status(request, estate_id):
+    estate = Estate.objects.get(pk=estate_id)
+    users = estate.users.all()
+    if not request.user in users:
+        raise PermissionDenied
+    return render(request, 'WebApp/admin/status.html', {'users': users, 'estate': estate})
+
+
+def estate_item_finished(request, estate_id, item_id):
+    estate = Estate.objects.get(pk=estate_id)
+    users = estate.users.all()
+    item = Item.objects.get(pk=item_id)
+    votes = Vote.objects.filter(item=item)
+    if not request.user in users:
+        raise PermissionDenied
+
+    ItemForm = modelform_factory(Item, form=DistributeItemForm)
+
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("estate_notfinished", args=[estate.id]))
+    else:
+        form = ItemForm(instance=item)
+
+    return render(request, 'WebApp/estate/estate_item_finished.html', {'votes': votes, 'users': users, 'estate': estate,
+                                                            'item': item, 'form': form})
+
+
+def estate_notfinished(request, estate_id):
+    """Estate view"""
+    estate = Estate.objects.get(pk= estate_id)
+    users = estate.users.all()
+    if not request.user in users:
+        raise PermissionDenied
+
+    Item.objects.filter(estate__id= estate_id)
+    items = estate.item_set.all()
+
+    return render(request, 'WebApp/estate/estate_notfinished.html', {'estate': estate, 'items': items})
+
+
+def estate_finished(request, estate_id):
+    """Estate view"""
+    estate = Estate.objects.get(pk=estate_id)
+    users = estate.users.all()
+    if not request.user in users:
+        raise PermissionDenied
+
+    Item.objects.filter(estate__id=estate_id)
+    items = estate.item_set.all()
+
+    estate.is_finished = True
+    estate.save()
+
+    return render(request, 'WebApp/estate/estate_finished.html', {'estate': estate, 'items': items})

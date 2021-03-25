@@ -10,6 +10,7 @@ class Estate(models.Model):
     title = models.CharField(max_length=60)
     date = models.DateTimeField(default=timezone.now)
     users = models.ManyToManyField(User)
+    is_finished= models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -18,6 +19,7 @@ class Estate(models.Model):
 class Item(models.Model):
     """Item Class"""
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     description = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='uploads/images/', default='uploads/images/default_image.png')
 

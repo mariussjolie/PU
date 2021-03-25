@@ -6,21 +6,38 @@
 
 {% block content %}
 <body class="centrify">
-    <div id="text_items">
-        <h1 id="title_items">{{estate.title}}ESTATE NAME</h1>
+<div id="text_items">
+        <h1 id="title_items">{{estate.title}}</h1>
         <p id="items_t">Here is an overview of current progress of each item (votes)</p>
-    </div >
-        <form id="box_items" method="post">
+</div>
+<div id="box_items" method="POST">
+
+        {% for item in items %}
+
             <div>
-                <h2>Item</h2>
-                <img src="https://timesofindia.indiatimes.com/photo/67586673.cms" width="50%" alt="">
+                <h1 id="title_items">{{ item.description}}</h1>
+                <a href="{% url 'estate_item_finished' estate.id item.id %}">
+                    <button>
+                        <img width=100 src="{% static item.picture %}">
+                    </button>
+                </a>
+                <h4> Chosen owner: {{item.owner}} </h4>
                 <br>
-                <label for="file">Progress:</label>
-                <progress id="file" value="32" max="100"> 32% </progress>
-                <br>
+                {{ item.as_p }}
+                <!--<br>
+                <label for="comment">Comment:</label>
+                <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
-        </form>
-        
-        <button type="button">Finish estate</button>
+        {% endfor %}
+
+        <br>
+        <a href="{% url 'estate_finished' estate.id %}">
+        <button id="login-button">Finish estate</button>
+    </a>
+    </div>
+
+
+
+
 </body>
 {% endblock %}

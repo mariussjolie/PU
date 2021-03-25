@@ -7,16 +7,30 @@
 {% block content %}
 <body class="centrify">
     <div id="text_items">
-        <h1 id="title_items">{{estate.title}}ESTATE NAME</h1>
+        <h1 id="title_items">{{estate.title}}</h1>
         <p id="items_t">Here is an overview of the assigned user for each item.</p>
     </div >
-        <form id="box_items" method="post">
+       <div id="box_items" method="POST">
+
+        {% for item in items %}
+
             <div>
-                <h2>Item</h2>
-                <img src="https://timesofindia.indiatimes.com/photo/67586673.cms" width="50%" alt="">
-                <p class="owner">Owner: USERNAME</p>
+                <h1 id="title_items">{{ item.description}}</h1>
+
+                <img width=100 src="{% static item.picture %}">
+
+                <h4> Chosen owner: {{item.owner}} </h4>
                 <br>
+                {{ item.as_p }}
+                <!--<br>
+                <label for="comment">Comment:</label>
+                <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
-        </form>
+        {% endfor %}
+
+        <br>
+
+    </div>
+
 </body>
 {% endblock %}

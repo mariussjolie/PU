@@ -1,6 +1,6 @@
 """WebApp Forms"""
 from django import forms
-
+from django.contrib.auth.models import User
 from .models import Item, Vote
 
 
@@ -30,6 +30,7 @@ VOTE_IMPORTANCE = (
     (10, 10)
 )
 
+
 class VoteForm(forms.ModelForm):
     """Form for adding user choice and importance"""
     choice =forms.ChoiceField(choices=VOTE_CHOICES)
@@ -38,3 +39,11 @@ class VoteForm(forms.ModelForm):
     class Meta:
         model = Vote
         fields = ('choice','importance')
+
+
+class DistributeItemForm(forms.ModelForm):
+    owner = forms.ModelChoiceField(queryset=User.objects.all())
+
+    class Meta:
+        model = Item
+        fields = ['owner']

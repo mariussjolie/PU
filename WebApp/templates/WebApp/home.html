@@ -26,25 +26,33 @@
 
         This is your homepage. Estates you are a part of will show up here.<br><br>
 
-      {% for estate in estates %}
-
-        {% if user.is_superuser %}
-            <a href="{% url 'estate.adminoverview' estate.id %}">
-                  <button id="login-button">{{ estate.title }}</button>
-              </a>
-        {% else %}
-
-              <a href="{% url 'estate' estate.id %}">
-                  <button id="login-button">{{ estate.title }}</button>
-              </a>
-
-        {% endif %}
-      {% endfor %}
-
 
   {% if user.is_staff %}
     <br>
-    <a href="{% url 'admin:index' %}"><button id="login-button">Admin page</button></a>
+      {% for estate in estates %}
+          {% if not estate.is_finished %}
+              <a href="{% url 'estate.adminoverview' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+          {% else %}
+            <a href="{% url 'estate_finished' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+          {% endif %}
+      {% endfor %}
+       <a href="{% url 'admin:index' %}"><button id="login-button">Admin page</button></a>
+  {% else %}
+      {% for estate in estates %}
+            {% if not estate.is_finished %}
+              <a href="{% url 'estate' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+          {% else %}
+            <a href="{% url 'estate_finished' estate.id %}">
+                  <button id="login-button">{{ estate.title }}</button>
+              </a>
+          {% endif %}
+      {% endfor %}
   {% endif %}
   </div>
 
