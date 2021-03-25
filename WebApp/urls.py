@@ -32,6 +32,8 @@ urlpatterns = [
     path('image_upload', views.item_image, name='image_upload'),
     path('success', views.success, name='success'),
     path('status/<int:estate_id>/', views.status, name='status'),
+    path('estates/<int:estate_id>/<int:item_id>/addcomment', views.write_comment, name='estate_addcomment'),
+    path('estates/<int:estate_id>/<int:item_id>/', views.view_comment, name='show_item'),
 
     path('estate_notfinished/<int:estate_id>/', views.estate_notfinished, name='estate_notfinished'),
     path('estate_item_finished/<int:estate_id>/<int:item_id>/', views.estate_item_finished, name='estate_item_finished'),
@@ -41,7 +43,7 @@ urlpatterns = [
 
     path('frontend/3', TemplateView.as_view(template_name='WebApp/estate/estate_item_notfinished.html'), name='estate_item_notfinished'),
     path('frontend/4', TemplateView.as_view(template_name='WebApp/estate/estate_notfinished.html'), name='estate_notfinished'),
-    path('frontend/5', views.view_comment, name='item_commentfield'),
+
 
 
 ]

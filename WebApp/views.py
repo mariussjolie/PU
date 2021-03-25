@@ -6,7 +6,6 @@ from django.core.exceptions import PermissionDenied
 from django.forms import modelformset_factory, modelform_factory
 from django.db import IntegrityError
 
-
 from .forms import ItemForm, VoteForm, CommentForm, DistributeItemForm
 from .models import Estate, Item, Vote, Notify, Comment
 
@@ -161,17 +160,35 @@ def write_comment(request, item_id, estate_id):
         form = CommentForm(request.POST)
 
         if form.is_valid():
+            estate = Estate.objects.get(id=estate_id)
+            user = request.user
+            item = Item.objects.get(id=item_id)
+            users = estate.users.all()
+            items = estate.item_set.all()
+
+            if not user in users:
+                raise PermissionDenied
+
+            if not item in items:
+                raise PermissionDenied
+
             comment = form.save(commit=False)
             comment.user = request.user
             comment.item_id = item_id
             comment.save()
 
-    return redirect("estate", estate_id=estate_id)
+        else:
+            raise PermissionDenied
+
+    return redirect("show_item", estate_id=estate_id, item_id=item_id)
 
 
-def view_comment(request):
+def view_comment(request, estate_id, item_id):
     form = CommentForm()
-    return render(request, "WebApp/estate/item_commentfield.html", {"form": form})
+    comments = Comment.objects.filter(item_id=item_id)
+
+    return render(request, "WebApp/estate/item_commentfield.html",
+                  {"form": form, "estate_id": estate_id, "item_id": item_id, "comments": comments})
 
 
 def status(request, estate_id):
