@@ -50,3 +50,10 @@ class Notify(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['user', 'estate'], name="unique_notification")
         ]
+
+class Comment(models.Model):
+    """Class for comments"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=500)
+    date = models.DateTimeField(default=timezone.now)

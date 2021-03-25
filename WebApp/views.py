@@ -7,8 +7,8 @@ from django.forms import modelformset_factory, modelform_factory
 from django.db import IntegrityError
 
 
-from .forms import ItemForm, VoteForm, DistributeItemForm
-from .models import Estate, Item, Vote, Notify
+from .forms import ItemForm, VoteForm, CommentForm, DistributeItemForm
+from .models import Estate, Item, Vote, Notify, Comment
 
 
 def home(request):
@@ -153,6 +153,25 @@ def notify(request, estate_id, user_id, item_id):
         pass
 
     return redirect("admin_view_estate_item", estate_id=estate_id, item_id=item_id)
+
+
+def write_comment(request, item_id, estate_id):
+    """Comment on items"""
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.item_id = item_id
+            comment.save()
+
+    return redirect("estate", estate_id=estate_id)
+
+
+def view_comment(request):
+    form = CommentForm()
+    return render(request, "WebApp/estate/item_commentfield.html", {"form": form})
 
 
 def status(request, estate_id):
