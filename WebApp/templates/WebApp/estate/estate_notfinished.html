@@ -6,11 +6,9 @@
 
 {% block content %}
 <body class="centrify">
-<div id="text_items">
+    <div id="text_items">
         <h1 id="title_items">{{estate.title}}ESTATE NAME</h1>
         <p id="items_t">Here is an overview of current progress of each item (votes)</p>
-
-
     </div >
         <form id="box_items" method="post">
             <div>
@@ -20,10 +18,9 @@
                 <label for="file">Progress:</label>
                 <progress id="file" value="32" max="100"> 32% </progress>
                 <br>
-
             </div>
         </form>
+        
         <button type="button">Finish estate</button>
 </body>
-
 {% endblock %}
