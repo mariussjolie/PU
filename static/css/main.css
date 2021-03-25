@@ -10,9 +10,9 @@ body {
 
 #notify_message {
     color: white;
-    background: red;
+    background: #8B0000;
     padding: 5px;
-    font-weight: bold;
+    border-radius: 10px;
 }
 
 #knapp {
