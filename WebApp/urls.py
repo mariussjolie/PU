@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
-    path('', views.home , name='home'),
+    path('', views.home, name='home'),
     path('auth/', include('WebApp.auth.urls')),
     path('DB/', views.test_db, name='DB'),
     path('estates/', views.estate_overview, name='Estates'),
@@ -31,11 +31,15 @@ urlpatterns = [
     path('estates/<int:estate_id>/end_estate/', TemplateView.as_view(template_name='estate/end_estate.html'), name='end_estate'),
     path('image_upload', views.item_image, name='image_upload'),
     path('success', views.success, name='success'),
+    path('status/<int:estate_id>/', views.status, name='status'),
+
+    path('estate_notfinished/<int:estate_id>/', views.estate_notfinished, name='estate_notfinished'),
+    path('estate_item_finished/<int:estate_id>/<int:item_id>/', views.estate_item_finished, name='estate_item_finished'),
+    path('estate_finished/<int:estate_id>/', views.estate_finished, name='estate_finished'),
+
     # Front-end-skisser:
-    path('frontend/1', TemplateView.as_view(template_name='WebApp/estate/estate_finished.html'), name='estate_finished'),
-    path('frontend/2', TemplateView.as_view(template_name='WebApp/estate/estate_item_finished.html'), name='estate_item_finished'),
+
     path('frontend/3', TemplateView.as_view(template_name='WebApp/estate/estate_item_notfinished.html'), name='estate_item_notfinished'),
-    path('frontend/4', TemplateView.as_view(template_name='WebApp/estate/estate_notfinished.html'), name='estate_notfinished'),
     path('frontend/5', TemplateView.as_view(template_name='WebApp/estate/item_commentfield.html'), name='item_commentfield'),
 
 ]

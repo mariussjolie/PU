@@ -59,7 +59,9 @@
             </table>
 
         {% endfor %}
-
+        <a href="{% url 'estate_notfinished' estate.id %}">
+              <button id="login-button">{{ "Distribute items" }}</button>
+         </a>
     </div>
 
 
