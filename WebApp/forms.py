@@ -11,7 +11,8 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = ['estate', 'description', 'picture']
 
-VOTE_CHOICES =(
+
+VOTE_CHOICES = (
     ("throw", "Throw"),
     ("keep", "Keep"),
     ("donate", "Donate"),
@@ -33,16 +34,16 @@ VOTE_IMPORTANCE = (
 
 class VoteForm(forms.ModelForm):
     """Form for adding user choice and importance"""
-    choice =forms.ChoiceField(choices=VOTE_CHOICES)
-    importance =forms.ChoiceField(choices=VOTE_IMPORTANCE)
+    choice = forms.ChoiceField(choices=VOTE_CHOICES)
+    importance = forms.ChoiceField(choices=VOTE_IMPORTANCE)
 
     class Meta:
         model = Vote
-        fields = ('choice','importance')
+        fields = ('choice', 'importance')
 
 
 class DistributeItemForm(forms.ModelForm):
-    owner = forms.ModelChoiceField(queryset=User.objects.all())
+    owner = forms.ModelChoiceField(queryset=User.objects.filter(is_staff=False))
 
     class Meta:
         model = Item

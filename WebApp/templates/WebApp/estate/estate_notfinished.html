@@ -31,9 +31,11 @@
         {% endfor %}
 
         <br>
+        {% if available_items|length == 0 %}
         <a href="{% url 'estate_finished' estate.id %}">
-        <button id="login-button">Finish estate</button>
-    </a>
+            <button id="login-button">Finish estate</button>
+        </a>
+        {% endif %}
     </div>
 
 
