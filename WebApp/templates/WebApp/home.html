@@ -11,7 +11,7 @@
 
 
 
-  <div class="home_box">
+  <div class="home_box" id="box_items">
       {% if not user.is_superuser%}
       {% for notification in notifications %}
             <div id="notify_message">
@@ -40,6 +40,7 @@
       {% endfor %}
       <br><br>
       Finished estates:
+      <br>
       {% for estate in estates %}
           {% if estate.is_finished %}
 
@@ -64,6 +65,7 @@
       {% endfor %}
       <br><br>
       Finished estates:
+      <br>
       {% for estate in estates %}
           {% if estate.is_finished %}
 

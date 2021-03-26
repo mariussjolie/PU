@@ -6,11 +6,11 @@
 
 {% block content %}
 <body class="centrify">
-    <div class="text_items">
+    <div id="box_items" class="text_items">
         <h1 id="title_items">{{estate.title}}</h1>
         <p id="items_t">Here is an overview of the assigned user for each item.</p>
     </div >
-       <div class="box_items" method="POST">
+       <div id="box_items"  method="POST">
 
         {% for item in items %}
 
