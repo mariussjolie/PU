@@ -18,18 +18,6 @@ def home(request):
     return render(request, 'WebApp/home.html', {'estates': estates, 'notifications': notifications})
 
 
-def test_db(request):
-    """TestDB view"""
-    return render(request, 'WebApp/test_DB.html', {'estates': Estate.objects.all()})
-
-
-def estate_overview(request):
-    """Estate overview view"""
-    user = request.user
-    estates = Estate.objects.filter(users__id=user.id)
-    return render(request, 'WebApp/estate/estates.html', {'estates': estates})
-
-
 def view_estate(request, estate_id):
     """Estate view"""
     estate = Estate.objects.get(pk=estate_id)
@@ -66,7 +54,7 @@ def view_estate(request, estate_id):
     else:
         formset = vote_form_set(queryset=votes)
 
-    return render(request, 'WebApp/estate/items.html', {'estate': estate, 'items': items, 'formset': formset})
+    return render(request, 'WebApp/estate/estate.html', {'estate': estate, 'items': items, 'formset': formset})
 
 
 def admin_view_estate(request, estate_id):
@@ -99,18 +87,19 @@ def admin_view_estate(request, estate_id):
 
     votes = Vote.objects.filter(item__in=items)
 
-    return render(request, 'WebApp/estate/items_admin.html',
+    return render(request, 'WebApp/estate/estate_admin.html',
                   {'estate': estate, 'incomplete_items': incomplete_items, 'completed_items': completed_items,
                    'users': users, 'votes': votes, 'items': items})
 
 
 def admin_view_estate_item(request, estate_id, item_id):
+    if not request.user.is_staff:
+        raise PermissionDenied
+
     estate = Estate.objects.get(pk=estate_id)
     all_users = estate.users.all()
     item = Item.objects.get(pk=item_id)
     votes = Vote.objects.filter(item=item)
-    if not request.user in all_users:
-        raise PermissionDenied
 
     normal_users = {}
     for user in all_users:
@@ -122,19 +111,6 @@ def admin_view_estate_item(request, estate_id, item_id):
     return render(request, 'WebApp/estate/item_admin.html', {'users': all_users, 'normal_users': normal_users,
                                                              'estate': estate, 'item': item, 'votes': votes,
                                                              'notifications': notifications})
-
-
-def item_image(request):
-    """Item image view"""
-    if request.method == 'POST':
-        form = ItemForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = ItemForm()
-    return render(request, 'WebApp/itemImage.html', {'form': form})
 
 
 def success(request):
@@ -183,12 +159,15 @@ def write_comment(request, item_id, estate_id):
     return redirect("show_item", estate_id=estate_id, item_id=item_id)
 
 
-def view_comment(request, estate_id, item_id):
-    form = CommentForm()
-    comments = Comment.objects.filter(item_id=item_id)
+def show_item(request, estate_id, item_id):
+    #TODO: Check if user is part of this estate
 
-    return render(request, "WebApp/estate/item_commentfield.html",
-                  {"form": form, "estate_id": estate_id, "item_id": item_id, "comments": comments})
+    form = CommentForm()
+    comments = Comment.objects.filter(item__id=item_id)
+    item = Item.objects.get(id=item_id)
+
+    return render(request, "WebApp/estate/item.html",
+                  {"form": form, "estate_id": estate_id, "item": item, "comments": comments})
 
 
 def status(request, estate_id):
@@ -238,7 +217,7 @@ def estate_notfinished(request, estate_id):
 
     available_items = Item.objects.filter(estate_id=estate_id, owner=None)
 
-    return render(request, 'WebApp/estate/estate_notfinished.html', {'estate': estate, 'items': items,
+    return render(request, 'WebApp/estate/estate_admin_notfinished.html', {'estate': estate, 'items': items,
                                                                      'available_items': available_items})
 
 

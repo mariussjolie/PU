@@ -5,15 +5,15 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-    <body class="centrify">
-
-    <div id="box_items" class="text_items">
+<body class="centrify">
+<div id="box_items" class="text_items">
         <h1 id="title_items">{{estate.title}}</h1>
         <p id="items_t">Here is an overview of current progress of each item (votes)</p>
-    </div>
+</div>
+<div id="box_items" method="POST">
 
-    <div id="box_items" method="POST">
         {% for item in items %}
+
             <div>
                 <h1 id="title_items">{{ item.description}}</h1>
                 <a href="{% url 'estate_item_finished' estate.id item.id %}">
@@ -24,19 +24,15 @@
                 <h4> Chosen owner: {{item.owner}} </h4>
                 <br>
                 {{ item.as_p }}
-                <!--<br>
-                <label for="comment">Comment:</label>
-                <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
         {% endfor %}
 
         <br>
         {% if available_items|length == 0 %}
-            <a href="{% url 'estate_finished' estate.id %}">
-                <button id="login-button">Finish estate</button>
-            </a>
+        <a href="{% url 'estate_finished' estate.id %}">
+            <button id="login-button">Finish estate</button>
+        </a>
         {% endif %}
     </div>
-
-    </body>
+</body>
 {% endblock %}

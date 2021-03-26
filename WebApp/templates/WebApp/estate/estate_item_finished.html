@@ -6,7 +6,6 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-
     <div class="split left">
         <div class="centered">
             <form id="box_items" method="POST">
@@ -14,15 +13,10 @@
 
                 {% csrf_token %}
                 <div>
-                    <h1 id="title_items">{{ item.description}}</h1>
+                    <h1 id="title_items">{{ item.description }}</h1>
                     <img width=100 src="{% static item.picture %}">
-
                     <br>
                     {{ form.as_p }}
-                    <!--<br>
-                    <label for="comment">Comment:</label>
-                    <input style="width: 323px;" type="text" id="comment"><br>-->
-
                 </div>
 
                 <br>
@@ -35,7 +29,6 @@
                         <th>Importance</th>
                     </tr>
                     </thead>
-
                     <tbody>
                     {% for user in users %}
                         {% with votes|by_user:user as votes_by_user %}
@@ -50,8 +43,8 @@
                     {% endfor %}
                     </tbody>
                 </table>
-
                 <br>
+
                 <button id="login-button">Save</button>
                 <br>
 
@@ -61,11 +54,14 @@
 
     <div class="split right">
         <div class="centered">
-            <form id="box_items" method="post">
-                <p class="names_admin">Roger - 29.03.18</p>
-                <p class="comment">Denne katten er min!!!</p>
-            </form>
+            {% for comment in comments %}
+                <div id="box_items">
+                    <p class="names_admin">{{ comment.user }} - {{ comment.date }}</p>
+                    <button id="editbutton" type="button">Edit</button>
+                    <button id="removebutton" type="button">Remove</button>
+                    <p class="comment">{{ comment.comment }}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
-
 {% endblock %}
