@@ -1,69 +1,67 @@
 <!-- templates/estate/items.html -->
 {% extends 'base.html' %}
 {% load static %}
-{% load vote_tags %}
 
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-
-    <div class="text_items">
-        <h1 id="title_items">{{ estate.title }}'s estate</h1>
-
-        {% for item in items %} <br>
-            <p id="admin_item">{{ item.description }}</p>
-            <img width=120 src="{% static  item.picture.url %}">
-
-            <table id="status_admin">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Choice</th>
-                    <th>Importance</th>
-                    <th>Status</th>
-                    <th>Notify</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
-                    {% with votes|by_user:user as votes_by_user %}
-                        {% for vote in votes_by_user|on_item:item %}
-                            <tr>
-                                <td id="user">{{ vote.user }}</td>
-                                <td>{{ vote.choice }}</td>
-                                <td>{{ vote.importance }}</td>
-                                <td>Finished</td>
-                                <td></td>
-                            </tr>
-
-                        {% empty %}
-
-                            <tr>
-                                <td id="user">{{ user }}</td>
-                                <td></td>
-                                <td></td>
-                                <td>Unfinished</td>
-                                <td>
-                                    {% for notification in notifications|by_user:user %}
-                                        Notified
-                                    {% empty %}
-                                        <a id="notify" href="./notify/{{user.id}}/">Notify</a>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-
-                        {% endfor %}
-                    {% endwith %}
-                {% endfor %}
-                </tbody>
-            </table>
-
+<body class="centrify">
+<div id="text_items">
+        <h1 id="title_items">{{estate.title}}</h1>
+        <p id="items_t">Here is an overview of current progress of each item (votes)</p>
+</div>
+<div id="box_items" method="POST">
+        Incomplete items:
+        <br>
+        {% for item in incomplete_items %}
+            <div>
+                <h1 id="title_items">{{ item.description }}</h1>
+                <a href="{% url 'admin_view_estate_item' estate.id item.id %}">
+                    <button>
+                        <img width=100 src="{% static item.picture %}">
+                    </button>
+                </a>
+                <br>
+                {{ item.as_p }}
+                <!--<br>
+                <label for="comment">Comment:</label>
+                <input style="width: 323px;" type="text" id="comment"><br>-->
+            </div>
         {% endfor %}
+        <br>
+        Completed items:
+        <br>
+        {% for item in completed_items %}
+            <div>
+                <h1 id="title_items">{{ item.description}}</h1>
+                <a href="{% url 'admin_view_estate_item' estate.id item.id %}">
+                    <button>
+                        <img width=100 src="{% static item.picture %}">
+                    </button>
+                </a>
+                <br>
+                {{ item.as_p }}
+                <!--<br>
+                <label for="comment">Comment:</label>
+                <input style="width: 323px;" type="text" id="comment"><br>-->
+            </div>
+        {% endfor %}
+        <br>
+        Progress on this estate:
+        <br>
+        <progress id="file" value="{{completed_items|length}}" max="{{items|length}} ">  </progress>
+        <br>
+        {% if completed_items|length == items|length %}
         <a href="{% url 'estate_notfinished' estate.id %}">
-              <button id="login-button">{{ "Distribute items" }}</button>
-         </a>
+            <button id="login-button">Distribute items</button>
+        </a>
+        {% endif %}
     </div>
 
 
+
+
+</body>
 {% endblock %}
+
 
