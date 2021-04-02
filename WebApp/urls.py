@@ -23,7 +23,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('auth/', include('WebApp.auth.urls')),
-    path('estates/', views.estate_overview, name='Estates'),
+    #path('estates/', views.estate_overview, name='Estates'),
     path('estates/<int:estate_id>/', views.view_estate, name='estate'),
     path('estates/<int:estate_id>/adminoverview/', views.admin_view_estate, name='estate.adminoverview'),
     path('estates/<int:estate_id>/<int:item_id>/notify/<int:user_id>/', views.notify, name='user_notify'),
