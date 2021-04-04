@@ -36,4 +36,3 @@ class VoteUnitTest(TestCase):
     def test_priority(self):
         """Test vote choice"""
         self.assertEqual("1", self.test_vote.importance)
-

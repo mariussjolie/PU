@@ -53,10 +53,10 @@ def view_estate(request, estate_id):
                 pass
         votes = Vote.objects.filter(item__in=items, user=request.user)
 
-    voteFormSet = modelformset_factory(Vote, form=VoteForm, extra=0)
+    vote_form_set = modelformset_factory(Vote, form=VoteForm, extra=0)
 
     if request.method == 'POST':
-        formset = voteFormSet(request.POST)
+        formset = vote_form_set(request.POST)
         if formset.is_valid():
             formset.save()
             try:
@@ -65,7 +65,7 @@ def view_estate(request, estate_id):
             except Notify.DoesNotExist:
                 pass
     else:
-        formset = voteFormSet(queryset=votes)
+        formset = vote_form_set(queryset=votes)
 
     return render(request, 'WebApp/estate/items.html', {'estate': estate, 'items': items, 'formset': formset})
 
@@ -176,15 +176,15 @@ def estate_item_finished(request, estate_id, item_id):
         if not user.is_staff:
             users[user.id] = user
 
-    itemForm = modelform_factory(Item, form=DistributeItemForm)
+    item_form = modelform_factory(Item, form=DistributeItemForm)
 
     if request.method == 'POST':
-        form = itemForm(request.POST, instance=item)
+        form = item_form(request.POST, instance=item)
         if form.is_valid():
             form.save()
             return redirect(reverse("estate_notfinished", args=[estate.id]))
     else:
-        form = itemForm(instance=item)
+        form = item_form(instance=item)
 
     return render(request, 'WebApp/estate/estate_item_finished.html', {'votes': votes, 'users': users, 'estate': estate,
                                                                        'item': item, 'form': form})
