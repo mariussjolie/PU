@@ -19,18 +19,18 @@ class EstateUnitTest(TestCase):
         self.user = get_user_model().objects.create_user(
             "username123", "email@email.com", "password123")
         self.test_estate = Estate.objects.create(
-            id=1, address="Trondheim", title="Solfrid 90", date=datetime.datetime(
+            id=1, address="Trondheim", title="Jon 1953-2021", date=datetime.datetime(
                 2015, 10, 9, 23, 55, 59, 342380))
         self.test_estate.save()
         self.test_estate.users.add(self.user)
 
     def test_address(self):
-        """Test adress"""
+        """Test address"""
         self.assertEqual("Trondheim", self.test_estate.address)
 
     def test_title(self):
         """Test title"""
-        self.assertEqual("Solfrid 90", self.test_estate.title)
+        self.assertEqual("Jon 1953-2021", self.test_estate.title)
 
     def test_user(self):
         """Test user"""

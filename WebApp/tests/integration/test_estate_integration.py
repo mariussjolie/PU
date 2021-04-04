@@ -19,7 +19,7 @@ class EstateIntegrationTest(TestCase):
         self.user = get_user_model().objects.create_user(
             "username123", "email@email.com", "password123")
         self.test_estate = Estate.objects.create(
-            id=1, address="Trondheim", title="Solfrid 90", date=datetime.datetime(
+            id=1, address="Trondheim", title="Jon 1953-2021", date=datetime.datetime(
                 2015, 10, 9, 23, 55, 59, 342380))
         self.test_estate.save()
         self.test_estate.users.add(self.user)
@@ -34,4 +34,4 @@ class EstateIntegrationTest(TestCase):
         """Test show estate"""
         client = Client()
         response = client.get("/DB/")
-        self.assertContains(response, "Solfrid 90")
+        self.assertContains(response, "Jon 1953-2021")

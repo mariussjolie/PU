@@ -20,7 +20,7 @@ class StatusIntegrationTest(TestCase):
         self.user2 = get_user_model().objects.create_user(
             "username2", "email2@email.com", "password123")
         self.test_estate = Estate.objects.create(
-            id=1, address="Trondheim", title="Solfrid 90", date=datetime.datetime(
+            id=1, address="Trondheim", title="Jon 1953-2021", date=datetime.datetime(
                 2015, 10, 9, 23, 55, 59, 342380))
         self.test_estate.save()
         self.test_estate.users.add(self.user1)
@@ -45,7 +45,7 @@ class StatusIntegrationTest(TestCase):
         client = Client()
         client.force_login(self.admin)
         response = client.get("/estates/1/adminoverview/")
-        self.assertContains(response, "Solfrid 90")
+        self.assertContains(response, "Jon 1953-2021")
 
     '''
     def test_correct_items(self):
