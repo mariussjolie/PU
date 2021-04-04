@@ -30,8 +30,10 @@ class ItemAdmin(admin.ModelAdmin):
         VoteInline,
     ]
 
+
 class VoteAdmin(admin.ModelAdmin):
     list_display = ('item', 'user', 'choice', 'importance')
+
 
 admin.site.register(Estate, EstateAdmin)
 admin.site.register(Item, ItemAdmin)

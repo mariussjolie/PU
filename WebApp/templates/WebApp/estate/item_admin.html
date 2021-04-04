@@ -6,28 +6,29 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-
 <body>
-  <div class="split left">
+<div class="split left">
     <div id="box_items" class="centered">
-    <h1> {{item.description}} </h1>
+        <h1> {{item.description}} </h1>
         <img width=100 src="{% static item.picture %}">
         <br>
         Progress on this item:
         <br>
         <progress id="file" value="{{votes|length}}" max="{{normal_users|length}}">  </progress>
-      <table id="status_admin">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Choice</th>
-                    <th>Importance</th>
-                    <th>Status</th>
-                    <th>Notify</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
+
+        <table id="status_admin">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Choice</th>
+                <th>Importance</th>
+                <th>Status</th>
+                <th>Notify</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
                     {% if not user.is_staff %}
                     {% with votes|by_user:user as votes_by_user %}
                         {% for vote in votes_by_user|on_item:item %}
@@ -54,29 +55,30 @@
                                     {% endfor %}
                                 </td>
                             </tr>
-
                         {% endfor %}
                     {% endwith %}
                     {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-            <a href="{% url 'estate.adminoverview' estate.id %}">
-                <button id="login-button">Back</button>
-            </a>
-    </div>
-  </div>
+            {% endfor %}
+            </tbody>
 
-  <div class="split right">
-    <div class="centered">
-      <form id="box_items" method="post">
-        <p class="names_admin">Roger - 29.03.18</p>
-        <button id="editbutton" type="button">Edit</button>
-        <button id="removebutton" type="button">Remove</button>
-        <p class="comment">Denne katten er min!!!</p>
-      </form>
+        </table>
+
+        <a href="{% url 'estate.adminoverview' estate.id %}">
+            <button id="login-button">Back</button>
+        </a>
     </div>
-  </div>
+</div>
+
+<div class="split right">
+    <div class="centered">
+        <form id="box_items" method="post">
+            <p class="names_admin">Roger - 29.03.18</p>
+            <button id="editbutton" type="button">Edit</button>
+            <button id="removebutton" type="button">Remove</button>
+            <p class="comment">Denne katten er min!!!</p>
+        </form>
+    </div>
+</div>
 
 </body>
 {% endblock %}

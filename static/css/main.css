@@ -1,3 +1,8 @@
+/*
+This is the main (and only) .css file used in this project
+Some formatting is already done by the django framework and will not be found in this file
+ */
+
 body {
     margin: 0;
     font-family: "Roboto", sans-serif;

@@ -1,18 +1,22 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}Login{% endblock %}</title>
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}Login{% endblock %}
+    </title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </head>
+
 <body>
-  {% include "modules/nav.html" %}
-  <main class="main">
-    {% block content %}
-    {% endblock %}
-  </main>
+{% include "modules/nav.html" %}
+<main class="main">
+    {% block content %}{% endblock %}
+</main>
 </body>
+
 </html>

@@ -27,11 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Used for Media (like picture for items)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/'
 
 # Application definition
 
+# 'WebApp.apps.WebappConfig' added to use the WepApp application
 INSTALLED_APPS = [
     'WebApp.apps.WebappConfig',
     'django.contrib.admin',

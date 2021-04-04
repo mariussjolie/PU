@@ -22,8 +22,12 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+
     path('auth/', include('WebApp.auth.urls')),
-    path('DB/', views.test_db, name='DB'),
+
+    #Testing the DB
+    #path('DB/', views.test_db, name='DB'),
+
     path('estates/', views.estate_overview, name='Estates'),
     path('estates/<int:estate_id>/', views.view_estate, name='estate'),
     path('estates/<int:estate_id>/adminoverview/', views.admin_view_estate, name='estate.adminoverview'),
@@ -42,7 +46,6 @@ urlpatterns = [
 
     path('frontend/3', TemplateView.as_view(template_name='WebApp/estate/estate_item_notfinished.html'), name='estate_item_notfinished'),
     path('frontend/5', TemplateView.as_view(template_name='WebApp/estate/item_commentfield.html'), name='item_commentfield'),
-
 ]
 
 if settings.DEBUG:

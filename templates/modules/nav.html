@@ -1,14 +1,31 @@
 <nav class="navigation">
-    <a href="{% url 'home' %}"><h2 id="navtitle">RØDDI</h2><p id="slogan">Fixing Family Feuds</p></a>
+    <a href="{% url 'home' %}">
+        <h2 id="navtitle">RØDDI</h2>
+        <p id="slogan">Fixing Family Feuds</p>
+    </a>
 
     {% load static %}
     <ul>
     {% if not user.is_authenticated %}
-        <li> <a id href="{% url 'login' %}"><button id="login">Log in!</button></a></li>
-        <li> <a href="{% url 'signup' %}"><button id="login">Register!</button></a></li>
+        <li>
+            <a id href="{% url 'login' %}">
+                <button id="login">Log in!</button>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'signup' %}">
+                <button id="login">Register!</button>
+            </a>
+        </li>
     {% else %}
-        <li> <a href="{% url 'logout' %}?next=/"><button id="login">Log out!</button></a></li>
-        <li> <button id="login" onclick="javascript:history.back()">&larr;</button></li>
+        <li>
+            <a href="{% url 'logout' %}?next=/">
+                <button id="login">Log out!</button>
+            </a>
+        </li>
+        <li>
+            <button id="login" onclick="javascript:history.back()">&larr;</button>
+        </li>
     {% endif%}
     </ul>
 </nav>

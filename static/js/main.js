@@ -1,3 +1,6 @@
+/*
+Contains the class TypeWriter, which make it possible for a word or sentence to be written visually one by one letter
+ */
 
 class TypeWriter {
     constructor(txtElement, words, wait = 3000) {

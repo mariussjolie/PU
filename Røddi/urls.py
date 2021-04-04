@@ -20,9 +20,8 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from WebApp.auth import urls as auth_urls
 
+# We use the WebApp for the entire project, except the admin page
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('WebApp.urls'))
-
-
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

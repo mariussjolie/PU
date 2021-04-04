@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-  color: Black;
-}
 
-</style>
+<head>
+    <style>
+        body {
+            color: Black;
+        }
+    </style>
 </head>
+
 <body>
 {% extends 'base.html' %}
 
 {% block content %}
-  <form id="signup-form" method="post">
-    {% csrf_token %}
-    <br>
-    {{ form.as_p }}
-    <br>
 
-    <button id="signup" type="submit">Sign up</button>
-  </form>
+    <form id="signup-form" method="post">
+        {% csrf_token %}
+        <br>
+        {{ form.as_p }}
+        <br>
+        <button id="signup" type="submit">Sign up</button>
+    </form>
+
 {% endblock %}
+
+</body>
+</html>
