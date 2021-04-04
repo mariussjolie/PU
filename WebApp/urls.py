@@ -24,10 +24,7 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('auth/', include('WebApp.auth.urls')),
-
-    #Testing the DB
-    #path('DB/', views.test_db, name='DB'),
-
+    path('DB/', views.test_db, name='DB'),
     path('estates/', views.estate_overview, name='Estates'),
     path('estates/<int:estate_id>/', views.view_estate, name='estate'),
     path('estates/<int:estate_id>/adminoverview/', views.admin_view_estate, name='estate.adminoverview'),
