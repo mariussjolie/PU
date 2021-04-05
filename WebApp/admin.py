@@ -1,7 +1,7 @@
 """WebApp Admin Forms"""
 from django.contrib import admin
 
-from .models import Estate, Item, Vote, Notify
+from .models import Estate, Item, Vote, Notify, Comment
 
 
 class ItemInline(admin.TabularInline):
@@ -30,11 +30,13 @@ class ItemAdmin(admin.ModelAdmin):
         VoteInline,
     ]
 
-
 class VoteAdmin(admin.ModelAdmin):
     list_display = ('item', 'user', 'choice', 'importance')
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('comment', 'user')
 
 admin.site.register(Estate, EstateAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Vote, VoteAdmin)
+admin.site.register(Comment, CommentAdmin)

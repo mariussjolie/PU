@@ -57,3 +57,6 @@ class Comment(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500)
     date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.comment
