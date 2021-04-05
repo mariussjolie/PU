@@ -5,11 +5,10 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-<body>
+    <div class="flex">
 
-
-    <div  class="split left">
-    <div id="box_items" class="centered">
+    <div  class="">
+    <div class="box_items centered">
         <h1 id="title_items">{{ item.description}}</h1>
         <img width=100 src="{% static item.picture %}">
         <br>
@@ -23,9 +22,9 @@
     </div>
   </div>
 
-  <div class="split right">
+  <div class="">
     <div class="centered">
-        <div id="box_items" class="centered">
+        <div class="box_items centered">
             {% for comment in comments %}
                 <p class="names_admin">{{comment.user}} - {{comment.date}}</p>
                 <p class="comment">{{ comment.comment }}</p>
@@ -33,5 +32,5 @@
         </div>
     </div>
   </div>
-</body>
+    </div>
 {% endblock %}

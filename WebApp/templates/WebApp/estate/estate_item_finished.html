@@ -6,7 +6,7 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-    <div class="split left">
+<div class="flex">
         <div class="centered">
             <form id="box_items" method="POST">
                 {{ form.management_form }}
@@ -50,9 +50,8 @@
 
             </form>
         </div>
-    </div>
 
-    <div class="split right">
+    <div class="">
         <div class="centered">
             {% for comment in comments %}
                 <div id="box_items">
@@ -64,4 +63,5 @@
             {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}

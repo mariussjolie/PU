@@ -6,12 +6,12 @@
 
 {% block content %}
 
-    <div id="box_items" class="text_items">
+    <div class="text_items">
         <h1 id="title_items">{{estate.title}}: Distribute assets</h1>
         <p id="items_t">For every item below you have to decide if you want to keep it, donate it or throw it away.<br>
             If you want to keep it you have to choose how important the item is to you.</p>
     </div >
-    <form id="box_items" method="post">
+    <form class="box_items" method="post">
         {{ formset.management_form }}
 
         {% for form in formset %}

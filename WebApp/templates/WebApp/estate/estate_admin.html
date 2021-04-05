@@ -6,11 +6,11 @@
 
 {% block content %}
     <body class="centrify">
-    <div id="text_items">
+    <div class="text_items">
         <h1 id="title_items">{{ estate.title }}</h1>
         <p id="items_t">Here is an overview of current progress of each item (votes)</p>
     </div>
-    <div id="box_items" method="POST">
+    <div class="box_items" method="POST">
         Incomplete items:
         <br>
         {% for item in incomplete_items %}
