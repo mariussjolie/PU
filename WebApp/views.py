@@ -1,14 +1,13 @@
 """WebApp Views"""
-from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
+from django.core.exceptions import PermissionDenied
+from django.db import IntegrityError
+from django.forms import modelformset_factory, modelform_factory
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.core.exceptions import PermissionDenied
-from django.forms import modelformset_factory, modelform_factory
-from django.db import IntegrityError
-from django.contrib.admin.views.decorators import staff_member_required
 
 from .decorators import user_is_member_of_estate
-from .forms import ItemForm, VoteForm, CommentForm, DistributeItemForm
+from .forms import VoteForm, CommentForm, DistributeItemForm
 from .models import Estate, Item, Vote, Notify, Comment
 
 
@@ -20,11 +19,9 @@ def home(request):
     return render(request, 'WebApp/home.html', {'estates': estates, 'notifications': notifications})
 
 
+@staff_member_required
 def finish_estate(request, estate_id):
     """Finish Estate"""
-    if not request.user.is_staff:
-        raise PermissionDenied
-
     # Set estate to finished
     estate = Estate.objects.get(pk=estate_id)
     estate.is_finished = True
@@ -33,15 +30,12 @@ def finish_estate(request, estate_id):
     return redirect('estate', estate_id=estate_id)
 
 
+@user_is_member_of_estate
 def view_estate(request, estate_id):
     """Estate view"""
     estate = Estate.objects.get(pk=estate_id)
-    users = estate.users.all()
     Item.objects.filter(estate__id=estate_id)
     items = estate.item_set.all()
-
-    if not request.user in users:
-        raise PermissionDenied
 
     if estate.is_finished:
         return render(request, 'WebApp/estate/estate_finished.html', {'estate': estate, 'items': items})
@@ -76,17 +70,11 @@ def view_estate(request, estate_id):
     return render(request, 'WebApp/estate/estate.html', {'estate': estate, 'items': items, 'formset': formset})
 
 
+@staff_member_required
 def admin_view_estate(request, estate_id):
-    """Admin overview """
-    if not request.user.is_staff:
-        raise PermissionDenied
+    """Admin estate overview """
     estate = Estate.objects.get(pk=estate_id)
-    all_users = estate.users.all()
-
-    users = {}
-    for user in all_users:
-        if not user.is_staff:
-            users[user.id] = user
+    users = estate.users.filter(is_staff=False)
 
     Item.objects.filter(estate__id=estate_id)
     items = estate.item_set.all()
@@ -111,19 +99,14 @@ def admin_view_estate(request, estate_id):
                    'users': users, 'votes': votes, 'items': items})
 
 
+@staff_member_required
 def admin_view_item(request, estate_id, item_id):
-    if not request.user.is_staff:
-        raise PermissionDenied
-
+    """Item view for admin"""
     estate = Estate.objects.get(pk=estate_id)
     all_users = estate.users.all()
     item = Item.objects.get(pk=item_id)
     votes = Vote.objects.filter(item=item)
-
-    normal_users = {}
-    for user in all_users:
-        if not user.is_staff:
-            normal_users[user.id] = user
+    normal_users = estate.users.filter(is_staff=False)
 
     notifications = Notify.objects.filter(estate__id=estate_id)
     comments = Comment.objects.filter(item__id=item_id)
@@ -134,10 +117,9 @@ def admin_view_item(request, estate_id, item_id):
                                                              'comments': comments})
 
 
+@staff_member_required
 def notify(request, estate_id, user_id, item_id):
     """Notify user to finish estate"""
-    if not request.user.is_staff:
-        raise PermissionDenied
     try:
         notification = Notify.objects.create(user_id=user_id, estate_id=estate_id)
         notification.save()
@@ -147,6 +129,7 @@ def notify(request, estate_id, user_id, item_id):
     return redirect("admin_view_estate_item", estate_id=estate_id, item_id=item_id)
 
 
+@user_is_member_of_estate
 def write_comment(request, item_id, estate_id):
     """Submit comment on item"""
     if request.method == 'POST':
@@ -158,12 +141,6 @@ def write_comment(request, item_id, estate_id):
             item = Item.objects.get(id=item_id)
             items = estate.item_set.all()
 
-            users = estate.users.all()
-            user = request.user
-
-            if not user in users:
-                raise PermissionDenied
-
             if not item in items:
                 raise PermissionDenied
 
@@ -171,7 +148,6 @@ def write_comment(request, item_id, estate_id):
             comment.user = request.user
             comment.item_id = item_id
             comment.save()
-
         else:
             raise PermissionDenied
 
@@ -180,6 +156,7 @@ def write_comment(request, item_id, estate_id):
 
 @user_is_member_of_estate
 def show_item(request, estate_id, item_id):
+    """Item view"""
     form = CommentForm()
     comments = Comment.objects.filter(item__id=item_id)
     item = Item.objects.get(id=item_id)
@@ -189,27 +166,12 @@ def show_item(request, estate_id, item_id):
 
 
 @user_is_member_of_estate
-def status(request, estate_id):
-    estate = Estate.objects.get(pk=estate_id)
-    users = estate.users.all()
-    # if not request.user in users:
-    #    raise PermissionDenied
-    return render(request, 'WebApp/admin/status.html', {'users': users, 'estate': estate})
-
-
-@user_is_member_of_estate
 def estate_item_finished(request, estate_id, item_id):
+    """Estate distribute item"""
     estate = Estate.objects.get(pk=estate_id)
-    all_users = estate.users.all()
+    users = estate.users.filter(is_staff=False)
     item = Item.objects.get(pk=item_id)
     votes = Vote.objects.filter(item=item)
-    # if not request.user in all_users:
-    #    raise PermissionDenied
-
-    users = {}
-    for user in all_users:
-        if not user.is_staff:
-            users[user.id] = user
 
     ItemForm = modelform_factory(Item, form=DistributeItemForm)
 
@@ -220,21 +182,19 @@ def estate_item_finished(request, estate_id, item_id):
             return redirect(reverse("estate_notfinished", args=[estate.id]))
     else:
         form = ItemForm(instance=item)
+        form.fields["owner"].queryset = users
 
     return render(request, 'WebApp/estate/estate_item_finished.html', {'votes': votes, 'users': users, 'estate': estate,
                                                                        'item': item, 'form': form})
 
 
+@staff_member_required
 def admin_estate_notfinished(request, estate_id):
-    """Estate view"""
+    """Estate distribute overview"""
     estate = Estate.objects.get(pk=estate_id)
-    users = estate.users.all()
-    if not request.user in users:
-        raise PermissionDenied
-
     Item.objects.filter(estate__id=estate_id)
-    items = estate.item_set.all()
 
+    items = estate.item_set.all()
     available_items = Item.objects.filter(estate_id=estate_id, owner=None)
 
     return render(request, 'WebApp/estate/estate_admin_notfinished.html', {'estate': estate, 'items': items,

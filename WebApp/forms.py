@@ -44,7 +44,7 @@ class VoteForm(forms.ModelForm):
 
 
 class DistributeItemForm(forms.ModelForm):
-    owner = forms.ModelChoiceField(queryset=User.objects.filter(is_staff=False))
+    owner = forms.ModelChoiceField(queryset=User.objects.all())
 
     class Meta:
         model = Item
