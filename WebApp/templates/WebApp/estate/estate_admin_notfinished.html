@@ -29,7 +29,7 @@
 
         <br>
         {% if available_items|length == 0 %}
-        <a href="{% url 'estate' estate.id %}">
+        <a href="{% url 'finish_estate' estate.id %}">
             <button id="login-button">Finish estate</button>
         </a>
         {% endif %}

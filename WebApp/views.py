@@ -30,7 +30,7 @@ def finish_estate(request, estate_id):
     estate.is_finished = True
     estate.save()
 
-    return redirect('view_estate', estate_id=estate_id)
+    return redirect('estate', estate_id=estate_id)
 
 
 def view_estate(request, estate_id):

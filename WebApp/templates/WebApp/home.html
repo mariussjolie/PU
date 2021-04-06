@@ -43,7 +43,7 @@
             <br>
             {% for estate in estates %}
                 {% if estate.is_finished %}
-                    <a href="{% url 'estate_finished' estate.id %}">
+                    <a href="{% url 'estate' estate.id %}">
                         <button id="login-button">{{ estate.title }}</button>
                     </a>
                 {% endif %}
