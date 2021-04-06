@@ -35,13 +35,6 @@ urlpatterns = [
     path('estate_notfinished/<int:estate_id>/', views.admin_estate_notfinished, name='estate_notfinished'),
     path('estate_item_finished/<int:estate_id>/<int:item_id>/', views.estate_item_finished, name='estate_item_finished'),
     path('estate_finished/<int:estate_id>/', views.finish_estate, name='finish_estate'),
-
-    # Front-end-skisser:
-
-    path('frontend/4', TemplateView.as_view(template_name='WebApp/estate/estate_admin_notfinished.html'), name='estate_notfinished'),
-
-
-
 ]
 
 if settings.DEBUG:
