@@ -239,35 +239,3 @@ def admin_estate_notfinished(request, estate_id):
 
     return render(request, 'WebApp/estate/estate_admin_notfinished.html', {'estate': estate, 'items': items,
                                                                            'available_items': available_items})
-
-
-@staff_member_required
-def remove_comment(request, comment_id):
-    comment = Comment.objects.get(pk=comment_id)
-    comment.delete()
-    return
-
-def edit_comment(request, comment_id):
-    comment = Comment.objects.get(id=comment_id)
-    estate = comment.estate
-    form = CommentForm(request.POST)
-
-    if form.is_valid():
-        estate = Estate.objects.get(id=estate_id)
-
-        item = Item.objects.get(id=item_id)
-        items = estate.item_set.all()
-
-        users = estate.users.all()
-        user = request.user
-
-        if not user in users:
-            raise PermissionDenied
-
-        if not item in items:
-            raise PermissionDenied
-
-        comment = form.save(commit=False)
-        comment.user = request.user
-        comment.item_id = item_id
-        comment.save()

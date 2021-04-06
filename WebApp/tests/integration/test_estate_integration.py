@@ -27,11 +27,13 @@ class EstateIntegrationTest(TestCase):
     def test_endpoint(self):
         """Test endpoint"""
         client = Client()
-        response = client.get("/DB/")
+        client.force_login(self.user)
+        response = client.get("/estates/1/")
         self.assertEqual(200, response.status_code)
 
     def test_show_estate(self):
         """Test show estate"""
         client = Client()
-        response = client.get("/DB/")
+        client.force_login(self.user)
+        response = client.get("/estates/1/")
         self.assertContains(response, "Jon 1953-2021")
