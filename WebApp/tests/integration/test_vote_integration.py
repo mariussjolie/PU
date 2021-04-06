@@ -55,8 +55,9 @@ class EstateIntegrationTest(TestCase):
         }
         client = Client()
         client.login(username="username123", password="password123")
-        response = client.get("/estates/1/")
+        client.get("/estates/1/")
         response = client.post("/estates/1/", data=data)
+        self.assertEqual(200, response.status_code)
         vote = Vote.objects.get(id=1)
         self.assertEqual(vote.importance, 4)
         self.assertEqual(vote.choice, 'donate')
