@@ -74,8 +74,8 @@
             {% for comment in comments %}
                 <div class="box_items">
                     <p class="names_admin">{{ comment.user }} - {{ comment.date }}</p>
-                    <a href="{% url 'admin:WebApp_comment_change' comment.id %}">EDIT</a>
-                    <a href="{% url 'admin:WebApp_comment_delete' comment.id %}">DELETE</a>
+                    <a id="login-button" href="{% url 'admin:WebApp_comment_change' comment.id %}">EDIT</a>
+                    <a id="login-button" href="{% url 'admin:WebApp_comment_delete' comment.id %}">DELETE</a>
                     <p class="comment">{{ comment.comment }}</p>
                 </div>
                 {% empty %}
