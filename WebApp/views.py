@@ -19,11 +19,6 @@ def home(request):
     return render(request, 'WebApp/home.html', {'estates': estates, 'notifications': notifications})
 
 
-def test_db(request):
-    """TestDB view"""
-    return render(request, 'WebApp/test_DB.html', {'estates': Estate.objects.all()})
-
-
 def estate_overview(request):
     """Estate overview view"""
     user = request.user
