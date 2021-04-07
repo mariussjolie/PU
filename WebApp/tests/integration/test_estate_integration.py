@@ -27,6 +27,8 @@ class EstateIntegrationTest(TestCase):
     def test_endpoint(self):
         """Test endpoint"""
         client = Client()
+        response = client.get("/estates/1/")
+        self.assertEqual(403, response.status_code)
         client.force_login(self.user)
         response = client.get("/estates/1/")
         self.assertEqual(200, response.status_code)

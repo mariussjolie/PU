@@ -33,10 +33,10 @@ class NotificationIntegrationTest(TestCase):
     def test_endpoint(self):
         """Test endpoint"""
         client = Client()
-        response = client.get("/estates/1/1/notify/1/")
-        self.assertEqual(403, response.status_code)
-        self.assertRaises(Notify.DoesNotExist, Notify.objects.get, user__id=2, estate__id=self.test_estate.id)
-        client.force_login(self.admin)
-        response = client.get("/estates/1/1/notify/1/")
+        response = client.get("/estates/1/1/notify/2/")
         self.assertEqual(302, response.status_code)
-        self.assertTrue(Notify.objects.get(user__id=2, estate__id=self.test_estate.id))
+        self.assertRaises(Notify.DoesNotExist, Notify.objects.get, user_id=2, estate_id=self.test_estate.id)
+        client.force_login(self.admin)
+        response = client.get("/estates/1/1/notify/2/")
+        self.assertEqual(302, response.status_code)
+        self.assertTrue(Notify.objects.get(user_id=2, estate_id=self.test_estate.id))

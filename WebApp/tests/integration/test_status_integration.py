@@ -35,7 +35,7 @@ class StatusIntegrationTest(TestCase):
         """Test endpoint"""
         client = Client()
         response = client.get("/estates/1/adminoverview/")
-        self.assertEqual(403, response.status_code)
+        self.assertEqual(302, response.status_code)
         client.force_login(self.admin)
         response = client.get("/estates/1/adminoverview/")
         self.assertEqual(200, response.status_code)
