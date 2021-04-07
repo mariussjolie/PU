@@ -31,8 +31,8 @@ urlpatterns = [
     path('estates/<int:estate_id>/<int:item_id>/', views.show_item, name='show_item'),
 
     path('estates/<int:estate_id>/<int:item_id>/adminoverview', views.admin_view_item, name='admin_view_estate_item'),
-    path('estate/<int:estate_id>/distribute', views.admin_estate_notfinished, name='estate_notfinished'),
-    path('estate/<int:estate_id>/distribute/<int:item_id>', views.estate_item_finished, name='estate_item_finished'),
+    path('estate/<int:estate_id>/distribute', views.admin_estate_distribute, name='estate_notfinished'),
+    path('estate/<int:estate_id>/distribute/<int:item_id>', views.estate_item_distribute, name='estate_item_finished'),
     path('estate/<int:estate_id>/finish', views.finish_estate, name='finish_estate'),
 ]
 

@@ -185,13 +185,14 @@ def show_item(request, estate_id, item_id):
                    "comments": comments})
 
 
-@user_is_member_of_estate
-def estate_item_finished(request, estate_id, item_id):
+@staff_member_required
+def estate_item_distribute(request, estate_id, item_id):
     """Estate distribute item"""
     estate = Estate.objects.get(pk=estate_id)
     users = estate.users.filter(is_staff=False)
     item = Item.objects.get(pk=item_id)
     votes = Vote.objects.filter(item=item)
+    comments = Comment.objects.filter(item__id=item_id)
 
     ItemForm = modelform_factory(Item, form=DistributeItemForm)
 
@@ -205,16 +206,17 @@ def estate_item_finished(request, estate_id, item_id):
         form.fields["owner"].queryset = users
 
     return render(request,
-                  'WebApp/estate/estate_item_finished.html',
+                  'WebApp/estate/estate_admin_distribute_item.html',
                   {'votes': votes,
                    'users': users,
                    'estate': estate,
+                   'comments': comments,
                    'item': item,
                    'form': form})
 
 
 @staff_member_required
-def admin_estate_notfinished(request, estate_id):
+def admin_estate_distribute(request, estate_id):
     """Estate distribute overview"""
     estate = Estate.objects.get(pk=estate_id)
     Item.objects.filter(estate__id=estate_id)
@@ -223,7 +225,7 @@ def admin_estate_notfinished(request, estate_id):
     available_items = Item.objects.filter(estate_id=estate_id, owner=None)
 
     return render(request,
-                  'WebApp/estate/estate_admin_notfinished.html',
+                  'WebApp/estate/estate_admin_distribute_overview.html',
                   {'estate': estate,
                    'items': items,
                    'available_items': available_items})
