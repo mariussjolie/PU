@@ -6,6 +6,7 @@ from django.test import TestCase
 class UserUnitTest(TestCase):
     """Unit test for User class"""
 
+    # pylint: disable=invalid-name
     def setUp(self):
         """Set up objects for testing"""
         self.user: get_user_model

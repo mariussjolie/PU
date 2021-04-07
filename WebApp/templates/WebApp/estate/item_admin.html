@@ -6,79 +6,83 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-<body>
-<div class="split left">
-    <div class="box_items" class="centered">
-        <h1> {{item.description}} </h1>
-        <img width=100 src="{% static item.picture %}">
-        <br>
-        Progress on this item:
-        <br>
-        <progress id="file" value="{{votes|length}}" max="{{normal_users|length}}">  </progress>
 
-        <table id="status_admin">
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Choice</th>
-                <th>Importance</th>
-                <th>Status</th>
-                <th>Notify</th>
-            </tr>
-            </thead>
+    <div class="flex">
 
-            <tbody>
-            {% for user in users %}
-                    {% if not user.is_staff %}
-                    {% with votes|by_user:user as votes_by_user %}
-                        {% for vote in votes_by_user|on_item:item %}
-                            <tr>
-                                <td id="user">{{ vote.user }}</td>
-                                <td>{{ vote.choice }}</td>
-                                <td>{{ vote.importance }}</td>
-                                <td>Finished</td>
-                                <td></td>
-                            </tr>
+        <div>
 
-                        {% empty %}
+            <div class="centered box_items">
+                <h1> {{ item.description }} </h1>
+                <img width=100 src="{% static item.picture %}">
+                <br>
+                Progress on this item:
+                <br>
+                <progress id="file" value="{{ votes|length }}" max="{{ normal_users|length }}"></progress>
+                <table id="status_admin">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Choice</th>
+                        <th>Importance</th>
+                        <th>Status</th>
+                        <th>Notify</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        {% if not user.is_staff %}
+                            {% with votes|by_user:user as votes_by_user %}
+                                {% for vote in votes_by_user|on_item:item %}
+                                    <tr>
+                                        <td id="user">{{ vote.user }}</td>
+                                        <td>{{ vote.choice }}</td>
+                                        <td>{{ vote.importance }}</td>
+                                        <td>Finished</td>
+                                        <td></td>
+                                    </tr>
 
-                            <tr>
-                                <td id="user">{{ user }}</td>
-                                <td></td>
-                                <td></td>
-                                <td>Unfinished</td>
-                                <td>
-                                    {% for notification in notifications|by_user:user %}
-                                        Notified
-                                    {% empty %}
-                                        <a id="notify" href="./notify/{{ user.id }}/">Notify</a>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    {% endwith %}
-                    {% endif %}
-            {% endfor %}
-            </tbody>
+                                {% empty %}
 
-        </table>
+                                    <tr>
+                                        <td id="user">{{ user }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Unfinished</td>
+                                        <td>
+                                            {% for notification in notifications|by_user:user %}
+                                                Notified
+                                            {% empty %}
+                                                <a id="notify" href="./notify/{{ user.id }}/">Notify</a>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
 
-        <a href="{% url 'estate.adminoverview' estate.id %}">
-            <button id="login-button">Back</button>
-        </a>
+                                {% endfor %}
+                            {% endwith %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{% url 'estate.adminoverview' estate.id %}">
+                    <button id="login-button">Back</button>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="centered">
+                {% for comment in comments %}
+                    <div class="box_items">
+                        <p class="names_admin">{{ comment.user }} - {{ comment.date }}</p>
+                        <a id="login-button" href="{% url 'admin:WebApp_comment_change' comment.id %}">EDIT</a>
+                        <a id="login-button" href="{% url 'admin:WebApp_comment_delete' comment.id %}">DELETE</a>
+                        <p class="comment">{{ comment.comment }}</p>
+                    </div>
+                {% empty %}
+                    <div class="box_items">
+                        <p class="comment">No comments</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
-
-<div id="split right">
-    <div class="centered">
-        <form class="box_items" method="post">
-            <p class="names_admin">Roger - 29.03.18</p>
-            <button id="editbutton" type="button">Edit</button>
-            <button id="removebutton" type="button">Remove</button>
-            <p class="comment">Denne katten er min!!!</p>
-        </form>
-    </div>
-</div>
-
-</body>
 {% endblock %}

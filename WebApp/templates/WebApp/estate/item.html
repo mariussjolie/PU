@@ -1,0 +1,36 @@
+<!-- templates/estate/estate_finished.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Items in estate{% endblock %}
+
+{% block content %}
+    <div class="flex">
+
+        <div class="">
+            <div class="box_items centered">
+                <h1 id="title_items">{{ item.description }}</h1>
+                <img width=100 src="{% static item.picture %}">
+                <br>
+                <!-- Add comment field -->
+                <form id="comment_field" method="POST" action="{% url 'estate_addcomment' estate_id item.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input id="login-button" type="Submit">
+                </form>
+                <br>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="centered">
+                <div class="box_items centered">
+                    {% for comment in comments %}
+                        <p class="names_admin">{{ comment.user }} - {{ comment.date }}</p>
+                        <p class="comment">{{ comment.comment }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

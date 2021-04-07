@@ -1,7 +1,8 @@
 """WebApp Admin Forms"""
+# pylint: disable=too-few-public-methods
 from django.contrib import admin
 
-from .models import Estate, Item, Vote, Notify
+from .models import Estate, Item, Vote, Comment
 
 
 class ItemInline(admin.TabularInline):
@@ -32,9 +33,16 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 class VoteAdmin(admin.ModelAdmin):
+    """Form for adding Vote"""
     list_display = ('item', 'user', 'choice', 'importance')
+
+
+class CommentAdmin(admin.ModelAdmin):
+    """Form for adding and editing Comment"""
+    list_display = ('comment', 'user')
 
 
 admin.site.register(Estate, EstateAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Vote, VoteAdmin)
+admin.site.register(Comment, CommentAdmin)

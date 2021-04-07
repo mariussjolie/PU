@@ -6,6 +6,7 @@ from django.test import Client, TestCase
 class UserIntegrationTest(TestCase):
     """User integration test"""
 
+    # pylint: disable=invalid-name
     def setUp(self):
         """Set up object for testing"""
         self.user = get_user_model().objects \

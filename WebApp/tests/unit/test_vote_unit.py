@@ -10,6 +10,7 @@ from WebApp.models import Vote, Estate, Item
 class VoteUnitTest(TestCase):
     """Unit test for Vote Class"""
 
+    # pylint: disable=invalid-name
     def setUp(self):
         """Setup test-objects"""
         self.user: get_user_model

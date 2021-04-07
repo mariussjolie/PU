@@ -1,0 +1,73 @@
+<!-- templates/estate/estate_finished.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load vote_tags %}
+
+{% block title %}Items in estate{% endblock %}
+
+{% block content %}
+    <div class="flex">
+        <div>
+            <div class="centered">
+                <form class="box_items" method="POST">
+                    {{ form.management_form }}
+
+                    {% csrf_token %}
+                    <div>
+                        <h1 id="title_items">{{ item.description }}</h1>
+                        <img width=100 src="{% static item.picture %}">
+                        <br>
+                        {{ form.as_p }}
+                    </div>
+
+                    <br>
+                    <br>
+                    <table style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Choice</th>
+                            <th>Importance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            {% with votes|by_user:user as votes_by_user %}
+                                {% for vote in votes_by_user|on_item:item %}
+                                    <tr>
+                                        <td id="user">{{ vote.user }}</td>
+                                        <td>{{ vote.choice }}</td>
+                                        <td>{{ vote.importance }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <button id="login-button">Save</button>
+                    <br>
+
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div class="centered">
+                {% for comment in comments %}
+                    <div class="box_items">
+                        <p class="names_admin">{{ comment.user }} - {{ comment.date }}</p>
+                        <a id="login-button" href="{% url 'admin:WebApp_comment_change' comment.id %}">EDIT</a>
+                        <a id="login-button" href="{% url 'admin:WebApp_comment_delete' comment.id %}">DELETE</a>
+                        <p class="comment">{{ comment.comment }}</p>
+                    </div>
+                {% empty %}
+                    <div class="box_items">
+                        <p class="comment">No comments</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

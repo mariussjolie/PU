@@ -6,27 +6,25 @@
 
 {% block content %}
     <body class="centrify">
-
-    <div class="box_items" class="text_items">
-        <h1 id="title_items">{{estate.title}}</h1>
+    <div id="box_items" class="text_items">
+        <h1 id="title_items">{{ estate.title }}</h1>
         <p id="items_t">Here is an overview of the assigned user for each item.</p>
-    </div >
+    </div>
+    <div class="box_items" method="POST">
 
-    <div class="box_items"  method="POST">
         {% for item in items %}
+
             <div>
-                <h1 id="title_items">{{ item.description}}</h1>
+                <h1 id="title_items">{{ item.description }}</h1>
+
                 <img width=100 src="{% static item.picture %}">
-                <h4> Chosen owner: {{item.owner}} </h4>
+
+                <h4> Chosen owner: {{ item.owner }} </h4>
                 <br>
                 {{ item.as_p }}
-                <!--<br>
-                <label for="comment">Comment:</label>
-                <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
         {% endfor %}
         <br>
     </div>
-
     </body>
 {% endblock %}

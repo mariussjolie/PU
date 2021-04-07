@@ -13,6 +13,7 @@ from WebApp.models import Estate, Item, Vote
 class EstateIntegrationTest(TestCase):
     """Estate Integration Test"""
 
+    # pylint: disable=invalid-name
     def setUp(self):
         """Set up test objects"""
         self.user = get_user_model().objects.create_user(

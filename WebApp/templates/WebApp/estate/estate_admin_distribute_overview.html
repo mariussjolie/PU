@@ -6,37 +6,34 @@
 
 {% block content %}
     <body class="centrify">
-
-    <div class="box_items" >
-        <h1 id="title_items">{{estate.title}}</h1>
-        <p id="items_t">Here is an overview of current progress of each item (votes)</p>
+    <div class="text_items">
+        <h1 id="title_items">{{ estate.title }}</h1>
+        <p id="items_t">Here is an overview of current progress of each item. Click on the image to assign an owner to
+            the item. </p>
     </div>
-
     <div class="box_items" method="POST">
+
         {% for item in items %}
+
             <div>
-                <h1 id="title_items">{{ item.description}}</h1>
+                <h1 id="title_items">{{ item.description }}</h1>
                 <a href="{% url 'estate_item_finished' estate.id item.id %}">
                     <button>
                         <img width=100 src="{% static item.picture %}">
                     </button>
                 </a>
-                <h4> Chosen owner: {{item.owner}} </h4>
+                <h4> Chosen owner: {{ item.owner }} </h4>
                 <br>
                 {{ item.as_p }}
-                <!--<br>
-                <label for="comment">Comment:</label>
-                <input style="width: 323px;" type="text" id="comment"><br>-->
             </div>
         {% endfor %}
 
         <br>
         {% if available_items|length == 0 %}
-            <a href="{% url 'estate_finished' estate.id %}">
+            <a href="{% url 'finish_estate' estate.id %}">
                 <button id="login-button">Finish estate</button>
             </a>
         {% endif %}
     </div>
-
     </body>
 {% endblock %}

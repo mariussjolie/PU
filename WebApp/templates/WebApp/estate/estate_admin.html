@@ -1,0 +1,58 @@
+<!-- templates/estate/items.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Items in estate{% endblock %}
+
+{% block content %}
+    <body class="centrify">
+    <div class="text_items">
+        <h1 id="title_items">{{ estate.title }}</h1>
+        <p id="items_t">Here is an overview of current progress of each item. Click on an image to see status and
+            comments on it.</p>
+    </div>
+    <div class="box_items" method="POST">
+        Incomplete items:
+        <br>
+        {% for item in incomplete_items %}
+            <div>
+                <h1 id="title_items">{{ item.description }}</h1>
+                <a href="{% url 'admin_view_estate_item' estate.id item.id %}">
+                    <button>
+                        <img width=100 src="{% static item.picture %}">
+                    </button>
+                </a>
+                <br>
+                {{ item.as_p }}
+            </div>
+        {% endfor %}
+        <br>
+        Completed items:
+        <br>
+        {% for item in completed_items %}
+            <div>
+                <h1 id="title_items">{{ item.description }}</h1>
+                <a href="{% url 'admin_view_estate_item' estate.id item.id %}">
+                    <button>
+                        <img width=100 src="{% static item.picture %}">
+                    </button>
+                </a>
+                <br>
+                {{ item.as_p }}
+            </div>
+        {% endfor %}
+        <br>
+        Progress on this estate:
+        <br>
+        <progress id="file" value="{{ completed_items|length }}" max="{{ items|length }} "></progress>
+        <br>
+        {% if completed_items|length == items|length %}
+            <a href="{% url 'estate_notfinished' estate.id %}">
+                <button id="login-button">Distribute items</button>
+            </a>
+        {% endif %}
+    </div>
+    </body>
+{% endblock %}
+
+
