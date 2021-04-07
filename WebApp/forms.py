@@ -1,6 +1,8 @@
 """WebApp Forms"""
+# pylint: disable=too-few-public-methods
 from django import forms
 from django.contrib.auth.models import User
+
 from .models import Item, Vote, Comment
 
 
@@ -39,21 +41,26 @@ class VoteForm(forms.ModelForm):
     importance = forms.ChoiceField(choices=VOTE_IMPORTANCE)
 
     class Meta:
+        """Meta class for VoteForm"""
         model = Vote
         fields = ('choice', 'importance')
 
 
 class DistributeItemForm(forms.ModelForm):
+    """Form for distributing items"""
     owner = forms.ModelChoiceField(queryset=User.objects.all())
 
     class Meta:
+        """Meta class for DistributeItemForm"""
         model = Item
         fields = ['owner']
+
 
 class CommentForm(forms.ModelForm):
     """Form for adding comment"""
     comment = forms.CharField(widget=forms.Textarea)
 
     class Meta:
+        """Meta class for CommentForm"""
         model = Comment
         fields = ('comment',)

@@ -5,23 +5,24 @@
 {% block title %}Items in estate{% endblock %}
 
 {% block content %}
-<body class="centrify">
-<div class="text_items">
-        <h1 id="title_items">{{estate.title}}</h1>
-        <p id="items_t">Here is an overview of current progress of each item. Click on the image to assign an owner to the item. </p>
-</div>
-<div class="box_items" method="POST">
+    <body class="centrify">
+    <div class="text_items">
+        <h1 id="title_items">{{ estate.title }}</h1>
+        <p id="items_t">Here is an overview of current progress of each item. Click on the image to assign an owner to
+            the item. </p>
+    </div>
+    <div class="box_items" method="POST">
 
         {% for item in items %}
 
             <div>
-                <h1 id="title_items">{{ item.description}}</h1>
+                <h1 id="title_items">{{ item.description }}</h1>
                 <a href="{% url 'estate_item_finished' estate.id item.id %}">
                     <button>
                         <img width=100 src="{% static item.picture %}">
                     </button>
                 </a>
-                <h4> Chosen owner: {{item.owner}} </h4>
+                <h4> Chosen owner: {{ item.owner }} </h4>
                 <br>
                 {{ item.as_p }}
             </div>
@@ -29,10 +30,10 @@
 
         <br>
         {% if available_items|length == 0 %}
-        <a href="{% url 'finish_estate' estate.id %}">
-            <button id="login-button">Finish estate</button>
-        </a>
+            <a href="{% url 'finish_estate' estate.id %}">
+                <button id="login-button">Finish estate</button>
+            </a>
         {% endif %}
     </div>
-</body>
+    </body>
 {% endblock %}

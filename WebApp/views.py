@@ -16,7 +16,8 @@ def home(request):
     estates = Estate.objects.filter(users__id=request.user.id)
     notifications = Notify.objects.filter(user_id=request.user.id)
 
-    return render(request, 'WebApp/home.html', {'estates': estates, 'notifications': notifications})
+    return render(request, 'WebApp/home.html',
+                  {'estates': estates, 'notifications': notifications})
 
 
 @staff_member_required
@@ -38,7 +39,8 @@ def view_estate(request, estate_id):
     items = estate.item_set.all()
 
     if estate.is_finished:
-        return render(request, 'WebApp/estate/estate_finished.html', {'estate': estate, 'items': items})
+        return render(request, 'WebApp/estate/estate_finished.html',
+                      {'estate': estate, 'items': items})
 
     VoteFormSet = modelformset_factory(Vote, form=VoteForm, extra=0)
 
@@ -48,7 +50,8 @@ def view_estate(request, estate_id):
             formset.save()
             # Delete notification if user has voted
             try:
-                notification = Notify.objects.get(estate__id=estate_id, user__id=request.user.id)
+                notification = Notify.objects.get(
+                    estate__id=estate_id, user__id=request.user.id)
                 notification.delete()
             except Notify.DoesNotExist:
                 pass
@@ -67,7 +70,8 @@ def view_estate(request, estate_id):
 
         formset = VoteFormSet(queryset=votes)
 
-    return render(request, 'WebApp/estate/estate.html', {'estate': estate, 'items': items, 'formset': formset})
+    return render(request, 'WebApp/estate/estate.html',
+                  {'estate': estate, 'items': items, 'formset': formset})
 
 
 @staff_member_required
@@ -89,14 +93,21 @@ def admin_view_estate(request, estate_id):
             item.has_everyone_voted = False
             item.save()
 
-    incomplete_items = Item.objects.filter(has_everyone_voted=False, estate_id=estate_id)
-    completed_items = Item.objects.filter(has_everyone_voted=True, estate_id=estate_id)
+    incomplete_items = Item.objects.filter(
+        has_everyone_voted=False, estate_id=estate_id)
+    completed_items = Item.objects.filter(
+        has_everyone_voted=True, estate_id=estate_id)
 
     votes = Vote.objects.filter(item__in=items)
 
-    return render(request, 'WebApp/estate/estate_admin.html',
-                  {'estate': estate, 'incomplete_items': incomplete_items, 'completed_items': completed_items,
-                   'users': users, 'votes': votes, 'items': items})
+    return render(request,
+                  'WebApp/estate/estate_admin.html',
+                  {'estate': estate,
+                   'incomplete_items': incomplete_items,
+                   'completed_items': completed_items,
+                   'users': users,
+                   'votes': votes,
+                   'items': items})
 
 
 @staff_member_required
@@ -111,22 +122,27 @@ def admin_view_item(request, estate_id, item_id):
     notifications = Notify.objects.filter(estate__id=estate_id)
     comments = Comment.objects.filter(item__id=item_id)
 
-    return render(request, 'WebApp/estate/item_admin.html', {'users': all_users, 'normal_users': normal_users,
-                                                             'estate': estate, 'item': item, 'votes': votes,
-                                                             'notifications': notifications,
-                                                             'comments': comments})
+    return render(request, 'WebApp/estate/item_admin.html',
+                  {'users': all_users, 'normal_users': normal_users,
+                   'estate': estate, 'item': item, 'votes': votes,
+                   'notifications': notifications,
+                   'comments': comments})
 
 
 @staff_member_required
 def notify(request, estate_id, user_id, item_id):
     """Notify user to finish estate"""
     try:
-        notification = Notify.objects.create(user_id=user_id, estate_id=estate_id)
+        notification = Notify.objects.create(
+            user_id=user_id, estate_id=estate_id)
         notification.save()
     except IntegrityError:
         pass
 
-    return redirect("admin_view_estate_item", estate_id=estate_id, item_id=item_id)
+    return redirect(
+        "admin_view_estate_item",
+        estate_id=estate_id,
+        item_id=item_id)
 
 
 @user_is_member_of_estate
@@ -141,7 +157,7 @@ def write_comment(request, item_id, estate_id):
             item = Item.objects.get(id=item_id)
             items = estate.item_set.all()
 
-            if not item in items:
+            if item not in items:
                 raise PermissionDenied
 
             comment = form.save(commit=False)
@@ -161,8 +177,12 @@ def show_item(request, estate_id, item_id):
     comments = Comment.objects.filter(item__id=item_id)
     item = Item.objects.get(id=item_id)
 
-    return render(request, "WebApp/estate/item.html",
-                  {"form": form, "estate_id": estate_id, "item": item, "comments": comments})
+    return render(request,
+                  "WebApp/estate/item.html",
+                  {"form": form,
+                   "estate_id": estate_id,
+                   "item": item,
+                   "comments": comments})
 
 
 @user_is_member_of_estate
@@ -184,8 +204,13 @@ def estate_item_finished(request, estate_id, item_id):
         form = ItemForm(instance=item)
         form.fields["owner"].queryset = users
 
-    return render(request, 'WebApp/estate/estate_item_finished.html', {'votes': votes, 'users': users, 'estate': estate,
-                                                                       'item': item, 'form': form})
+    return render(request,
+                  'WebApp/estate/estate_item_finished.html',
+                  {'votes': votes,
+                   'users': users,
+                   'estate': estate,
+                   'item': item,
+                   'form': form})
 
 
 @staff_member_required
@@ -197,5 +222,8 @@ def admin_estate_notfinished(request, estate_id):
     items = estate.item_set.all()
     available_items = Item.objects.filter(estate_id=estate_id, owner=None)
 
-    return render(request, 'WebApp/estate/estate_admin_notfinished.html', {'estate': estate, 'items': items,
-                                                                           'available_items': available_items})
+    return render(request,
+                  'WebApp/estate/estate_admin_notfinished.html',
+                  {'estate': estate,
+                   'items': items,
+                   'available_items': available_items})

@@ -10,6 +10,7 @@ from WebApp.models import Estate, Item
 class ItemUnitTest(TestCase):
     """Unit test for Item"""
 
+    # pylint: disable=invalid-name
     def setUp(self):
         """Set up test objects"""
         self.user: get_user_model

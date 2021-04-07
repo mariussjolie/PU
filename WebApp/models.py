@@ -1,4 +1,5 @@
 """WebApp Models"""
+# pylint: disable=too-few-public-methods
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
@@ -19,9 +20,14 @@ class Estate(models.Model):
 class Item(models.Model):
     """Item Class"""
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
     description = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='uploads/images/', default='uploads/images/default_image.png')
+    picture = models.ImageField(upload_to='uploads/images/',
+                                default='uploads/images/default_image.png')
     has_everyone_voted = models.BooleanField(default=False)
 
     def __str__(self):
@@ -36,9 +42,13 @@ class Vote(models.Model):
     importance = models.IntegerField(default=0)
 
     class Meta:
+        """Meta class for Vote"""
         constraints = [
-            models.UniqueConstraint(fields=['user', 'item'], name="unique_useritem")
-        ]
+            models.UniqueConstraint(
+                fields=[
+                    'user',
+                    'item'],
+                name="unique_useritem")]
 
 
 class Notify(models.Model):
@@ -47,9 +57,14 @@ class Notify(models.Model):
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
 
     class Meta:
+        """Meta class for Notify"""
         constraints = [
-            models.UniqueConstraint(fields=['user', 'estate'], name="unique_notification")
-        ]
+            models.UniqueConstraint(
+                fields=[
+                    'user',
+                    'estate'],
+                name="unique_notification")]
+
 
 class Comment(models.Model):
     """Class for comments"""
