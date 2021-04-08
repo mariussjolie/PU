@@ -31,14 +31,12 @@
         <br>
         {% for item in completed_items %}
             <div>
-                <h1 id="title_items">{{ item.description }}</h1>
                 <a href="{% url 'admin_view_estate_item' estate.id item.id %}">
+                    <h1 id="title_items">{{ item.description }}</h1>
                     <button>
-                        <img width=100 src="{% static item.picture %}">
+                        <img width=120 src="{% static item.picture %}">
                     </button>
                 </a>
-                <br>
-                {{ item.as_p }}
             </div>
         {% endfor %}
         <br>

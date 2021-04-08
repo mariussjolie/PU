@@ -19,8 +19,8 @@
             <div>
                 <a href="{% url 'show_item' estate.id form.instance.item.id %}">
                     <h3 id="house"> {{ form.instance.item.description }}</h3>
+                    <img width=120 src="{% static  form.instance.item.picture.url %}">
                 </a>
-                <img width=120 src="{% static  form.instance.item.picture.url %}">
                 <br>
                 {{ form.as_p }}
             </div>

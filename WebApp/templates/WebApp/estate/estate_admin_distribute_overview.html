@@ -16,15 +16,13 @@
         {% for item in items %}
 
             <div>
-                <h1 id="title_items">{{ item.description }}</h1>
                 <a href="{% url 'estate_item_finished' estate.id item.id %}">
+                    <h1 id="title_items">{{ item.description }}</h1>
                     <button>
-                        <img width=100 src="{% static item.picture %}">
+                        <img width=120 src="{% static item.picture %}">
                     </button>
                 </a>
                 <h4> Chosen owner: {{ item.owner }} </h4>
-                <br>
-                {{ item.as_p }}
             </div>
         {% endfor %}
 
